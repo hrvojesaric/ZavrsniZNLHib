@@ -40,6 +40,17 @@ public class Utakmica extends Entitet implements Serializable {
     
     private String rezultat;
     
+     @OneToMany(mappedBy = "utakmica")
+    private List<Dogadaj> dogadajiut=new ArrayList<>();
+   
+    public List<Dogadaj> getDogadajiUtakmica() {
+        return dogadajiut;
+    }
+
+    public void setDogadajiUtakmica (List<Dogadaj> dogadajiut) {
+        this.dogadajiut = dogadajiut;
+    }
+    
 
 
     

@@ -14,8 +14,8 @@ import java.util.List;
 public interface ObradaSucelje<T> {
     
     public List<T> getLista();
-    public void kontrola(T t) throws ZavrsniZNLhibException;
     public T spremi(T t)  throws ZavrsniZNLhibException;
     public void obrisi(T t) throws ZavrsniZNLhibException;
+    public void kontrola(T t) throws ZavrsniZNLhibException;
     
 }
