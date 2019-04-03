@@ -7,6 +7,7 @@ package saric.zavrsniZNLhib.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -31,6 +32,7 @@ public class Igrac extends Entitet implements Serializable {
     
     @Temporal(TemporalType.DATE)
     private Date datumrodenja;
+    
     
     
     public String getPrezime() {
