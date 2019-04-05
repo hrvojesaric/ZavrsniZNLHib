@@ -100,11 +100,11 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(lblOpis2);
         lblOpis2.setBounds(30, 160, 280, 40);
 
-        lblRegistracija.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        lblRegistracija.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
         lblRegistracija.setForeground(new java.awt.Color(153, 204, 255));
         lblRegistracija.setText("Nemaš korisničke podatke?");
         jPanel1.add(lblRegistracija);
-        lblRegistracija.setBounds(90, 220, 170, 50);
+        lblRegistracija.setBounds(110, 220, 190, 50);
 
         btnRegistracija.setText("Registriraj se");
         jPanel1.add(btnRegistracija);

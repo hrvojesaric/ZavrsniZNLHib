@@ -6,6 +6,7 @@
 package saric.zavrsniZNLhib.controller;
 
 import java.util.List;
+import org.hibernate.Query;
 import saric.zavrsniZNLhib.model.Sudac;
 import saric.zavrsniZNLhib.pomocno.HibernateUtil;
 import saric.zavrsniZNLhib.pomocno.ObradaSucelje;
@@ -26,6 +27,17 @@ public class ObradaSudac extends Obrada<Sudac> implements ObradaSucelje<Sudac> {
         return HibernateUtil.getSession().createQuery("from Sudac").list();
     }
 
+    public List<Sudac> getLista(String uvjet,boolean isSelected){
+         
+          Query query = HibernateUtil.getSession().createQuery("from Sudac a "
+                 + " where concat(a.ime,' ',a.prezime) like :uvjet")
+                 .setString("uvjet", "%" + uvjet + "%");
+         if(isSelected){
+             query.setMaxResults(50);
+         }
+         
+         return query.list();
+     }
 
     @Override
     public Sudac spremi(Sudac su) throws ZavrsniZNLhibException {

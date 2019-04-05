@@ -74,6 +74,11 @@ public class Igrac extends Entitet implements Serializable {
     public void setDatumrodenja(Date datumrodenja) {
         this.datumrodenja = datumrodenja;
     }
+
+    @Override
+    public String toString() {
+            return getIme() + " " + getPrezime();
+    }
     
     
 }

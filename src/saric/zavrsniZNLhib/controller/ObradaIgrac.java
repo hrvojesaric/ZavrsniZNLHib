@@ -6,6 +6,7 @@
 package saric.zavrsniZNLhib.controller;
 
 import java.util.List;
+import org.hibernate.Query;
 import saric.zavrsniZNLhib.model.Igrac;
 import saric.zavrsniZNLhib.pomocno.HibernateUtil;
 import saric.zavrsniZNLhib.pomocno.ObradaSucelje;
@@ -26,6 +27,18 @@ public class ObradaIgrac extends Obrada<Igrac> implements ObradaSucelje<Igrac> {
     return HibernateUtil.getSession().createQuery("from Igrac").list();
 
     }
+    
+    public List<Igrac> getLista(String uvjet,boolean isSelected){
+         
+          Query query = HibernateUtil.getSession().createQuery("from Igrac a "
+                 + " where concat(a.ime,' ',a.prezime) like :uvjet")
+                 .setString("uvjet", "%" + uvjet + "%");
+         if(isSelected){
+             query.setMaxResults(50);
+         }
+         
+         return query.list();
+     }
 
 
     @Override
