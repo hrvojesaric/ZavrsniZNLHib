@@ -5,6 +5,10 @@
  */
 package saric.zavrsniZNLhib.view;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import saric.zavrsniZNLhib.controller.ObradaSudac;
@@ -25,7 +29,7 @@ public class Suci extends javax.swing.JFrame {
     public Suci() {
         initComponents();
         obradaEntitet = new ObradaSudac();
-         ucitajEntitete();
+        ucitajEntitete();
     }
 
     /**
@@ -47,11 +51,12 @@ public class Suci extends javax.swing.JFrame {
         txtPrezime = new javax.swing.JTextField();
         txtIme = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtDatumRodenja = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtBrojLicence = new javax.swing.JTextField();
+        dpcDatumRodenja = new com.github.lgooddatepicker.components.DatePicker();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Suci");
 
         lstEntiteti.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -89,13 +94,6 @@ public class Suci extends javax.swing.JFrame {
 
         jLabel5.setText("Datum rođenja");
 
-        txtDatumRodenja.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtDatumRodenja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDatumRodenjaActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Broj licence");
 
         txtBrojLicence.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -106,7 +104,7 @@ public class Suci extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
@@ -119,11 +117,10 @@ public class Suci extends javax.swing.JFrame {
                         .addComponent(btnPromjena)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBrisanje))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtBrojLicence, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtPrezime, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtDatumRodenja, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5)))
+                    .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtBrojLicence, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dpcDatumRodenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,15 +135,15 @@ public class Suci extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(21, 21, 21)
                         .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtBrojLicence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDatumRodenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addComponent(dpcDatumRodenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnPromjena)
                             .addComponent(btnDodaj)
@@ -171,11 +168,15 @@ public class Suci extends javax.swing.JFrame {
 
         ocistiPolja();
 
+        Date input = new Date();
+        input.setTime(entitet.getDatumrodenja().getTime());
+        LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
         txtIme.setText(entitet.getIme());
         txtPrezime.setText(entitet.getPrezime());
         txtBrojLicence.setText(entitet.getBroj_licence());
-        txtDatumRodenja.setText(entitet.getDatumrodenja().toString());
-        
+        dpcDatumRodenja.setDate(date);
+
 
     }//GEN-LAST:event_lstEntitetiValueChanged
 
@@ -184,13 +185,24 @@ public class Suci extends javax.swing.JFrame {
         txtIme.setText("");
         txtPrezime.setText("");
         txtBrojLicence.setText("");
+        dpcDatumRodenja.setDate(LocalDate.of(1995, 1, 1));
 
     }
 
     private void preuzmiVrijednosti(Sudac entitet) {
+
+        GregorianCalendar gdate = new GregorianCalendar();
+        LocalDate ldate = dpcDatumRodenja.getDate();
+        Integer godina = ldate.getYear();
+        Integer mjesec = ldate.getMonthValue();
+        Integer dan = ldate.getDayOfMonth();
+        gdate.set(godina, (mjesec - 1), dan);
+        Date date = new Date();
+        date.setTime(gdate.getTimeInMillis());
+
         entitet.setIme(txtIme.getText());
         entitet.setPrezime(txtPrezime.getText());
-
+        entitet.setDatumrodenja(date);
         entitet.setBroj_licence(txtBrojLicence.getText());
 
     }
@@ -248,15 +260,12 @@ public class Suci extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBrisanjeActionPerformed
 
-    private void txtDatumRodenjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDatumRodenjaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDatumRodenjaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBrisanje;
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnPromjena;
+    private com.github.lgooddatepicker.components.DatePicker dpcDatumRodenja;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -264,18 +273,17 @@ public class Suci extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Sudac> lstEntiteti;
     private javax.swing.JTextField txtBrojLicence;
-    private javax.swing.JTextField txtDatumRodenja;
     private javax.swing.JTextField txtIme;
     private javax.swing.JTextField txtPrezime;
     // End of variables declaration//GEN-END:variables
 private void ucitajEntitete() {
-        
-            DefaultListModel<Sudac> m = new DefaultListModel<>();
-            for (Sudac s : obradaEntitet.getLista()) {
-                m.addElement(s);
-            
+
+        DefaultListModel<Sudac> m = new DefaultListModel<>();
+        for (Sudac s : obradaEntitet.getLista()) {
+            m.addElement(s);
+
             lstEntiteti.setModel(m);
-        
+
         }
 
     }

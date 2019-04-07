@@ -46,6 +46,14 @@ public class ObradaIgrac extends Obrada<Igrac> implements ObradaSucelje<Igrac> {
         kontrola(ig);
         return dao.save(ig);
     }
+    public List<Igrac> spremi(List<Igrac> igraci) throws ZavrsniZNLhibException {
+
+        for (Igrac s : igraci) {
+            
+        }
+
+        return dao.save(igraci);
+    }
 
     @Override
     public void obrisi(Igrac ig) throws ZavrsniZNLhibException {

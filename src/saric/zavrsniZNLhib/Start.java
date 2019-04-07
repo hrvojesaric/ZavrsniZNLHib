@@ -27,7 +27,7 @@ public class Start {
 //        HibernateUtil.getSession();
 
 //                ObradaIgrac os = new ObradaIgrac();
-
+//
 //        Igr s = null;
 //        List<Sudac> lista = new ArrayList<>();
 //        Faker f = new Faker();
@@ -53,57 +53,33 @@ public class Start {
 //                ex.printStackTrace();
 //            }
 //        }
-//        ObradaSudac os = new ObradaSudac();
+//        ObradaIgrac oi = new ObradaIgrac();
 //
-//        Sudac s;
-//        List<Sudac> lista = new ArrayList<>();
+//        Igrac ig;
+//        List<Igrac> lista = new ArrayList<>();
 //        Faker f = new Faker();
 //        GregorianCalendar v = new GregorianCalendar(1993, 10, 10);
 //        Date d = new Date();
 //        d.setTime(v.getTimeInMillis());
 //      
-//        for (int i = 0; i < 100; i++) {
+//        for (int i = 0; i < 300; i++) {
 //
-//            s = new Sudac();
-//            s.setIme(f.name().firstName());
-//            s.setPrezime(f.name().lastName());
-//            s.setBroj_licence("321312");
-//            s.setDatumrodenja(d);
+//            ig = new Igrac();
+//            ig.setIme(f.name().firstName());
+//            ig.setPrezime(f.name().lastName());
+//            ig.setBroj_licence("321312");
+//            ig.setDatumrodenja(d);
 //                           
-//            lista.add(s);
+//            lista.add(ig);
 //           
 //        }
-//        
-//         try {
-//                os.spremi(lista);
-//            } catch (ZavrsniZNLhibException ex) {
-//                ex.printStackTrace();
-//            }
-//        }
-//
-//        s.setIme();
-//        s.setPrezime("Jovičić");
-//        s.setBroj_licence("21321");
+
 //        try {
-//            os.spremi(s);
+//            oi.spremi(lista);
 //        } catch (ZavrsniZNLhibException e) {
 //            e.printStackTrace();
 //        }
-// Igrac s = new Igrac();
-//        ObradaIgrac os = new ObradaIgrac();
-//
-//        s.setIme("Peter");
-//        s.setPrezime("Jovičić");
-//        s.setBroj_licence("21321");
-//        GregorianCalendar v = new GregorianCalendar(1993, 10, 10);
-//        Date d = new Date();
-//        d.setTime(v.getTimeInMillis());
-//        s.setDatumrodenja(d);
-//        try {
-//            os.spremi(s);
-//        } catch (ZavrsniZNLhibException e) {
-//            e.printStackTrace();
-//        }
+
 
 //        Operater o = new Operater();
 //      o.setEmail("hrvoje.saric93@gmail.com");

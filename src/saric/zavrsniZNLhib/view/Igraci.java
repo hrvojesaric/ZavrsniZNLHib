@@ -5,10 +5,15 @@
  */
 package saric.zavrsniZNLhib.view;
 
-
-
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import javafx.util.converter.LocalDateTimeStringConverter;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import saric.zavrsniZNLhib.model.Igrac;
@@ -44,8 +49,6 @@ public class Igraci extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         txtPrezime = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtMomcad = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtBrojregistracije = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -56,19 +59,16 @@ public class Igraci extends javax.swing.JFrame {
         btnBrisanje = new javax.swing.JButton();
         txtIme = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtBrojUgovora = new javax.swing.JTextField();
         txtUvjet = new javax.swing.JTextField();
         chbLimitator = new javax.swing.JCheckBox();
+        dpcDatumRodenja = new com.github.lgooddatepicker.components.DatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Igrači");
 
         jLabel2.setText("Prezime");
 
         txtPrezime.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-
-        jLabel3.setText("Momčad");
-
-        txtMomcad.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel4.setText("Broj registracije");
 
@@ -106,8 +106,6 @@ public class Igraci extends javax.swing.JFrame {
 
         jLabel5.setText("Datum rođenja");
 
-        txtBrojUgovora.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
         txtUvjet.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtUvjetKeyReleased(evt);
@@ -128,7 +126,7 @@ public class Igraci extends javax.swing.JFrame {
                         .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(chbLimitator)
-                        .addGap(0, 25, Short.MAX_VALUE))
+                        .addGap(0, 34, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,13 +140,11 @@ public class Igraci extends javax.swing.JFrame {
                         .addComponent(btnPromjena)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBrisanje))
-                    .addComponent(jLabel3)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtBrojregistracije, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtMomcad, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtPrezime, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtBrojUgovora, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5)))
+                        .addComponent(txtBrojregistracije, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                        .addComponent(txtPrezime, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jLabel5)
+                    .addComponent(dpcDatumRodenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,19 +166,15 @@ public class Igraci extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMomcad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtBrojregistracije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBrojUgovora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(dpcDatumRodenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnPromjena)
                             .addComponent(btnDodaj)
@@ -207,29 +199,42 @@ public class Igraci extends javax.swing.JFrame {
 
         ocistiPolja();
 
-        txtMomcad.setText(entitet.getMomcad().getNaziv());
+        Date input = new Date();
+        input.setTime(entitet.getDatumrodenja().getTime());
+        LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                
+        dpcDatumRodenja.setDate(date);
         txtIme.setText(entitet.getIme());
         txtPrezime.setText(entitet.getPrezime());
         txtBrojregistracije.setText(entitet.getBroj_licence());
-        
 
+        
 
     }//GEN-LAST:event_lstEntitetiValueChanged
 
     private void ocistiPolja() {
-        txtMomcad.setText("");
+        dpcDatumRodenja.setDate(LocalDate.of(1995, 1, 1));
         txtIme.setText("");
         txtPrezime.setText("");
         txtBrojregistracije.setText("");
-        
+
     }
 
     private void preuzmiVrijednosti(Igrac entitet) {
+        
+        GregorianCalendar gdate = new GregorianCalendar();
+        LocalDate ldate = dpcDatumRodenja.getDate();
+        Integer godina = ldate.getYear();
+        Integer mjesec = ldate.getMonthValue();
+        Integer dan = ldate.getDayOfMonth();
+        gdate.set(godina, (mjesec-1), dan);
+        Date date = new Date();
+        date.setTime(gdate.getTimeInMillis());
+        
         entitet.setIme(txtIme.getText());
         entitet.setPrezime(txtPrezime.getText());
-        
+        entitet.setDatumrodenja(date);
         entitet.setBroj_licence(txtBrojregistracije.getText());
-        
 
     }
 
@@ -268,8 +273,6 @@ public class Igraci extends javax.swing.JFrame {
             DuzeUcitanjeEntiteta d = new DuzeUcitanjeEntiteta();
             d.start();
         }
-
-    
 
     }
 
@@ -337,17 +340,15 @@ public class Igraci extends javax.swing.JFrame {
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnPromjena;
     private javax.swing.JCheckBox chbLimitator;
+    private com.github.lgooddatepicker.components.DatePicker dpcDatumRodenja;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Igrac> lstEntiteti;
-    private javax.swing.JTextField txtBrojUgovora;
     private javax.swing.JTextField txtBrojregistracije;
     private javax.swing.JTextField txtIme;
-    private javax.swing.JTextField txtMomcad;
     private javax.swing.JTextField txtPrezime;
     private javax.swing.JTextField txtUvjet;
     // End of variables declaration//GEN-END:variables
