@@ -18,6 +18,7 @@ public class Izbornik extends javax.swing.JFrame {
      * Creates new form Izbornik
      */
     public Izbornik(Operater operater) {
+        
         initComponents();
         this.operater=operater;
         setTitle(operater.getPrezime() + " " + operater.getIme());
@@ -38,6 +39,9 @@ public class Izbornik extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dobro došli u Izbornik");
@@ -78,6 +82,20 @@ public class Izbornik extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setText("O aplikaciji");
+        jMenuBar1.add(jMenu2);
+
+        jMenu5.setText("                                                            ");
+        jMenuBar1.add(jMenu5);
+
+        jMenu3.setText("Odjavi se");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -112,10 +130,18 @@ new Suci().setVisible(true);
         new Igraci().setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        new Login().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenu3MouseClicked
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;

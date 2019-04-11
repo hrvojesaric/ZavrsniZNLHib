@@ -54,6 +54,27 @@ public class ObradaOperater extends Obrada<Operater> implements ObradaSucelje<Op
 
     @Override
     public void kontrola(Operater t) throws ZavrsniZNLhibException {
+        if(t.getIme()==null){
+            throw new ZavrsniZNLhibException("Ime nije definirano");
+        }
+        if(t.getIme().trim().isEmpty()){
+            throw new ZavrsniZNLhibException("Ime nije Uneseno");
+        }
+        
+        if(t.getPrezime()==null){
+            throw new ZavrsniZNLhibException("Prezime nije definirano");
+        }
+        if(t.getPrezime().trim().isEmpty()){
+            throw new ZavrsniZNLhibException("Prezime nije uneseno");
+        }
+        
+         if(t.getEmail()==null){
+            throw new ZavrsniZNLhibException("Email nije definiran");
+        }
+        if(t.getEmail().trim().isEmpty()){
+            throw new ZavrsniZNLhibException("Email nije unesen");
+        }
+        
         
     }
 

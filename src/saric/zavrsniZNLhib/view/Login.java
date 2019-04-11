@@ -40,7 +40,8 @@ public class Login extends javax.swing.JFrame {
         lblOpis2 = new javax.swing.JLabel();
         lblRegistracija = new javax.swing.JLabel();
         btnRegistracija = new javax.swing.JButton();
-        btnSlobodan = new javax.swing.JButton();
+        btnAbout = new javax.swing.JButton();
+        lblPoruka = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,7 +62,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtKorisnickoIme);
-        txtKorisnickoIme.setBounds(300, 70, 160, 20);
+        txtKorisnickoIme.setBounds(300, 60, 160, 20);
 
         pwdLozinka.setForeground(new java.awt.Color(102, 102, 102));
         pwdLozinka.setText("unesitelozinku");
@@ -71,7 +72,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(pwdLozinka);
-        pwdLozinka.setBounds(300, 100, 160, 20);
+        pwdLozinka.setBounds(300, 90, 160, 20);
 
         btnPrijava.setText("Prijavi se");
         btnPrijava.addActionListener(new java.awt.event.ActionListener() {
@@ -80,13 +81,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnPrijava);
-        btnPrijava.setBounds(330, 140, 100, 23);
+        btnPrijava.setBounds(360, 130, 100, 23);
 
         lblLogin.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lblLogin.setForeground(new java.awt.Color(255, 255, 255));
         lblLogin.setText("Dobro došli !");
         jPanel1.add(lblLogin);
-        lblLogin.setBounds(100, 20, 160, 40);
+        lblLogin.setBounds(80, 10, 160, 40);
 
         lblOpis.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblOpis.setForeground(new java.awt.Color(255, 255, 255));
@@ -100,19 +101,29 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(lblOpis2);
         lblOpis2.setBounds(30, 160, 280, 40);
 
-        lblRegistracija.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
+        lblRegistracija.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
         lblRegistracija.setForeground(new java.awt.Color(153, 204, 255));
-        lblRegistracija.setText("Nemaš korisničke podatke?");
+        lblRegistracija.setText("Nemaš korisničke podatke?       ------>");
         jPanel1.add(lblRegistracija);
-        lblRegistracija.setBounds(110, 220, 190, 50);
+        lblRegistracija.setBounds(50, 240, 270, 30);
 
         btnRegistracija.setText("Registriraj se");
+        btnRegistracija.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistracijaActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnRegistracija);
-        btnRegistracija.setBounds(320, 240, 140, 23);
+        btnRegistracija.setBounds(330, 247, 130, 23);
 
-        btnSlobodan.setText("Nastavi bez registracije");
-        jPanel1.add(btnSlobodan);
-        btnSlobodan.setBounds(290, 280, 170, 23);
+        btnAbout.setText("Želiš saznati više o aplikaciji?");
+        jPanel1.add(btnAbout);
+        btnAbout.setBounds(240, 280, 220, 23);
+
+        lblPoruka.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblPoruka.setForeground(new java.awt.Color(255, 0, 51));
+        jPanel1.add(lblPoruka);
+        lblPoruka.setBounds(284, 170, 180, 20);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saric/zavrsniZNLhib/view/50261747_10218473344087494_4561425864452997120_n.jpg"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -140,7 +151,10 @@ public class Login extends javax.swing.JFrame {
            new Izbornik(o).setVisible(true);
            dispose();
         }else{
-            JOptionPane.showMessageDialog(null, "Neispravan email ili kombinacija email i lozinka");
+            lblPoruka.setText("Neispravan email ili lozinka");
+            txtKorisnickoIme.setText("korisnickoime@email.com");
+            pwdLozinka.setText("..........");
+                    
         }
         
     }//GEN-LAST:event_btnPrijavaActionPerformed
@@ -153,16 +167,22 @@ public class Login extends javax.swing.JFrame {
       pwdLozinka.setText("h");
     }//GEN-LAST:event_pwdLozinkaMouseClicked
 
+    private void btnRegistracijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistracijaActionPerformed
+        new Register().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegistracijaActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAbout;
     private javax.swing.JButton btnPrijava;
     private javax.swing.JButton btnRegistracija;
-    private javax.swing.JButton btnSlobodan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblOpis;
     private javax.swing.JLabel lblOpis2;
+    private javax.swing.JLabel lblPoruka;
     private javax.swing.JLabel lblRegistracija;
     private javax.swing.JPasswordField pwdLozinka;
     private javax.swing.JTextField txtKorisnickoIme;

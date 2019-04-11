@@ -9,21 +9,24 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import saric.zavrsniZNLhib.controller.ObradaIgrac;
+import saric.zavrsniZNLhib.controller.ObradaMomcad;
 import saric.zavrsniZNLhib.controller.ObradaOperater;
 import saric.zavrsniZNLhib.controller.ObradaSudac;
 import saric.zavrsniZNLhib.model.Igrac;
+import saric.zavrsniZNLhib.model.Momcad;
 import saric.zavrsniZNLhib.model.Operater;
 import saric.zavrsniZNLhib.model.Sudac;
 import saric.zavrsniZNLhib.pomocno.BCrypt;
 import saric.zavrsniZNLhib.pomocno.HibernateUtil;
 import saric.zavrsniZNLhib.pomocno.ZavrsniZNLhibException;
 import saric.zavrsniZNLhib.view.Login;
+import saric.zavrsniZNLhib.view.SplashScreen;
 
 //upogoniti Hibernate prateći https://examples.javacodegeeks.com/enterprise-java/hibernate/hibernate-maven-example/
 public class Start {
 
     public static void main(String[] args) {
-        new Login().setVisible(true);
+        new SplashScreen().setVisible(true);
 //        HibernateUtil.getSession();
 
 //                ObradaIgrac os = new ObradaIgrac();
@@ -73,20 +76,17 @@ public class Start {
 //            lista.add(ig);
 //           
 //        }
-
 //        try {
 //            oi.spremi(lista);
 //        } catch (ZavrsniZNLhibException e) {
 //            e.printStackTrace();
 //        }
-
-
 //        Operater o = new Operater();
-//      o.setEmail("hrvoje.saric93@gmail.com");
-//      o.setLozinka(BCrypt.hashpw("h", BCrypt.gensalt()));
+//      o.setEmail("default@gmail.com");
+//      o.setLozinka(BCrypt.hashpw("default", BCrypt.gensalt()));
 //        System.out.println(o.getLozinka());
-//      o.setIme("Hrvoje");
-//      o.setPrezime("Šarić");
+//      o.setIme("jer niste korisnik");
+//      o.setPrezime("Ne možete unositi izmjene");
 //      
 //        ObradaOperater oo = new ObradaOperater();
 //        try {
@@ -94,6 +94,20 @@ public class Start {
 //        } catch (ZavrsniZNLhibException ex) {
 //           ex.printStackTrace();
 //        }
-    }}
+//        Momcad m = new Momcad();
+//        m.setNaziv("Momčad 3");
+//        m.setFizioterapeut("Fizio 3");
+//        m.setPredstavnik_kluba("Predstavnik 3");
+//        m.setTrener("Trener 3");
+//        m.setStadion("Stadion 3");
+//        
+//        ObradaMomcad om = new ObradaMomcad();
+//        try {
+//            om.spremi(m);
+//        } catch (ZavrsniZNLhibException ex) {
+//            ex.printStackTrace();
+//        }
 
-
+        
+    }
+}
