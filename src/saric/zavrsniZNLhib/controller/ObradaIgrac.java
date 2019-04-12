@@ -28,6 +28,7 @@ public class ObradaIgrac extends Obrada<Igrac> implements ObradaSucelje<Igrac> {
 
     }
     
+    
     public List<Igrac> getLista(String uvjet,boolean isSelected){
          
           Query query = HibernateUtil.getSession().createQuery("from Igrac a "

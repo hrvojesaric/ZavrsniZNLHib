@@ -44,6 +44,7 @@ public class Igraci extends javax.swing.JFrame {
             ms.addElement(s);
         });
         cmbMomcadi.setModel(ms);
+        ucitajEntitete();
 
     }
 
@@ -217,6 +218,7 @@ public class Igraci extends javax.swing.JFrame {
             return;
         }
 
+        
         Igrac entitet = lstEntiteti.getSelectedValue();
         if (entitet == null) {
             return;
@@ -265,6 +267,7 @@ public class Igraci extends javax.swing.JFrame {
         entitet.setPrezime(txtPrezime.getText());
         entitet.setDatumrodenja(date);
         entitet.setBroj_licence(txtBrojregistracije.getText());
+        entitet.setMomcad((Momcad)cmbMomcadi.getSelectedItem());
 
     }
 

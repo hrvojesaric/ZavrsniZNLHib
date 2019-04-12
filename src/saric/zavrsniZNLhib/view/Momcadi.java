@@ -5,17 +5,31 @@
  */
 package saric.zavrsniZNLhib.view;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
+import saric.zavrsniZNLhib.controller.ObradaIgrac;
+import saric.zavrsniZNLhib.controller.ObradaMomcad;
+import saric.zavrsniZNLhib.model.Igrac;
+import saric.zavrsniZNLhib.model.Momcad;
+import saric.zavrsniZNLhib.pomocno.ZavrsniZNLhibException;
+
 /**
  *
  * @author Hrvoje-PC
  */
 public class Momcadi extends javax.swing.JFrame {
 
+    private ObradaMomcad obradaEntitet;
+    private ObradaIgrac obradaIgrac;
+
     /**
      * Creates new form Momčadi
      */
     public Momcadi() {
         initComponents();
+        obradaEntitet = new ObradaMomcad();
+        ucitajEntitete();
     }
 
     /**
@@ -42,6 +56,9 @@ public class Momcadi extends javax.swing.JFrame {
         txtFizioterapeut = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstIgraci = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtSifra = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,42 +111,58 @@ public class Momcadi extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(lstIgraci);
 
+        jLabel3.setText("Igrači u klubu");
+
+        jLabel6.setText("Popis Momčadi");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDodaj)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPromjena)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBrisanje))
-                    .addComponent(txtStadion, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtPredstavnikKluba, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFizioterapeut, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDodaj)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnPromjena)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBrisanje))
+                            .addComponent(txtStadion, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtPredstavnikKluba, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFizioterapeut, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(txtSifra, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel3))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
                         .addComponent(jLabel2)
@@ -143,12 +176,14 @@ public class Momcadi extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFizioterapeut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSifra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnPromjena)
                             .addComponent(btnDodaj)
                             .addComponent(btnBrisanje)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
 
@@ -161,26 +196,38 @@ public class Momcadi extends javax.swing.JFrame {
             return;
         }
 
-        Sudac entitet = lstEntiteti.getSelectedValue();
+        Momcad entitet = lstEntiteti.getSelectedValue();
         if (entitet == null) {
             return;
         }
+        
+        
+        DefaultListModel<Igrac> m = new DefaultListModel<>();
 
-        ocistiPolja();
+        entitet.getIgraci().forEach((p) -> {
 
-        Date input = new Date();
-        input.setTime(entitet.getDatumrodenja().getTime());
-        LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            m.addElement(p);
 
-        txtIme.setText(entitet.getIme());
-        txtStadion.setText(entitet.getPrezime());
-        txtPredstavnikKluba.setText(entitet.getBroj_licence());
-        dpcDatumRodenja.setDate(date);
+        });
+        lstIgraci.setModel(m);
+        
+       
+        
+               
+       
+        
+
+        txtNaziv.setText(entitet.getNaziv());
+        txtStadion.setText(entitet.getStadion());
+        txtPredstavnikKluba.setText(entitet.getPredstavnik_kluba());
+        txtFizioterapeut.setText(entitet.getFizioterapeut());
+        
+
 
     }//GEN-LAST:event_lstEntitetiValueChanged
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        Sudac entitet = new Sudac();
+        Momcad entitet = new Momcad();
 
         preuzmiVrijednosti(entitet);
 
@@ -197,7 +244,7 @@ public class Momcadi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnPromjenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjenaActionPerformed
-        Sudac entitet = lstEntiteti.getSelectedValue();
+        Momcad entitet = lstEntiteti.getSelectedValue();
 
         if (entitet == null) {
             JOptionPane.showConfirmDialog(null, "Prvo odaberite polaznika");
@@ -217,8 +264,9 @@ public class Momcadi extends javax.swing.JFrame {
         ocistiPolja();
     }//GEN-LAST:event_btnPromjenaActionPerformed
 
+    
     private void btnBrisanjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrisanjeActionPerformed
-        Sudac entitet = lstEntiteti.getSelectedValue();
+        Momcad entitet = lstEntiteti.getSelectedValue();
 
         if (entitet == null) {
             JOptionPane.showConfirmDialog(null, "Prvo odaberite smjer");
@@ -237,22 +285,53 @@ public class Momcadi extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lstIgraciValueChanged
 
+    private void ucitajEntitete() {
 
+        DefaultListModel<Momcad> m = new DefaultListModel<>();
+        for (Momcad s : obradaEntitet.getLista()) {
+            m.addElement(s);
+
+            lstEntiteti.setModel(m);
+
+        }
+
+    }
+
+    private void ocistiPolja() {
+
+        txtNaziv.setText("");
+        txtStadion.setText("");
+        txtPredstavnikKluba.setText("");
+        txtFizioterapeut.setText("");
+
+    }
+
+    private void preuzmiVrijednosti(Momcad entitet) {
+
+        entitet.setNaziv(txtNaziv.getText());
+        entitet.setPredstavnik_kluba(txtPredstavnikKluba.getText());
+        entitet.setStadion(txtStadion.getText());
+        entitet.setFizioterapeut(txtFizioterapeut.getText());
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBrisanje;
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnPromjena;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<Sudac> lstEntiteti;
-    private javax.swing.JList<Sudac> lstIgraci;
+    private javax.swing.JList<Momcad> lstEntiteti;
+    private javax.swing.JList<Igrac> lstIgraci;
     private javax.swing.JTextField txtFizioterapeut;
     private javax.swing.JTextField txtNaziv;
     private javax.swing.JTextField txtPredstavnikKluba;
+    private javax.swing.JTextField txtSifra;
     private javax.swing.JTextField txtStadion;
     // End of variables declaration//GEN-END:variables
 }

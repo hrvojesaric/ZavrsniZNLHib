@@ -56,6 +56,8 @@ public class Start {
 //                ex.printStackTrace();
 //            }
 //        }
+
+
 //        ObradaIgrac oi = new ObradaIgrac();
 //
 //        Igrac ig;
@@ -72,6 +74,7 @@ public class Start {
 //            ig.setPrezime(f.name().lastName());
 //            ig.setBroj_licence("321312");
 //            ig.setDatumrodenja(d);
+//            ig.setMomcad("");
 //                           
 //            lista.add(ig);
 //           
@@ -81,6 +84,8 @@ public class Start {
 //        } catch (ZavrsniZNLhibException e) {
 //            e.printStackTrace();
 //        }
+        
+
 //        Operater o = new Operater();
 //      o.setEmail("default@gmail.com");
 //      o.setLozinka(BCrypt.hashpw("default", BCrypt.gensalt()));
@@ -94,12 +99,25 @@ public class Start {
 //        } catch (ZavrsniZNLhibException ex) {
 //           ex.printStackTrace();
 //        }
+//        Operater o = new Operater();
+//      o.setEmail("hrvoje.saric93@gmail.com");
+//      o.setLozinka(BCrypt.hashpw("h", BCrypt.gensalt()));
+//        System.out.println(o.getLozinka());
+//      o.setIme("Hrvoje");
+//      o.setPrezime("Šarić");
+//      
+//        ObradaOperater oo = new ObradaOperater();
+//        try {
+//            oo.spremi(o);
+//        } catch (ZavrsniZNLhibException ex) {
+//           ex.printStackTrace();
+//        }
 //        Momcad m = new Momcad();
-//        m.setNaziv("Momčad 3");
-//        m.setFizioterapeut("Fizio 3");
-//        m.setPredstavnik_kluba("Predstavnik 3");
-//        m.setTrener("Trener 3");
-//        m.setStadion("Stadion 3");
+//        m.setNaziv("Momčad 1");
+//        m.setFizioterapeut("Fizio 1");
+//        m.setPredstavnik_kluba("Predstavnik 1");
+//        m.setTrener("Trener 1");
+//        m.setStadion("Stadion 1");
 //        
 //        ObradaMomcad om = new ObradaMomcad();
 //        try {

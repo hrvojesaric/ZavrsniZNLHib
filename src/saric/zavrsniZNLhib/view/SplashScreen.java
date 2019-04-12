@@ -7,6 +7,7 @@ package saric.zavrsniZNLhib.view;
 
 import javax.swing.JOptionPane;
 import saric.zavrsniZNLhib.controller.ObradaIgrac;
+import saric.zavrsniZNLhib.controller.ObradaMomcad;
 import saric.zavrsniZNLhib.controller.ObradaOperater;
 import saric.zavrsniZNLhib.model.Operater;
 
@@ -47,7 +48,7 @@ public class SplashScreen extends javax.swing.JFrame {
             }
 
             lblPoruka.setText("Spajam se na bazu...");
-            if (new ObradaIgrac().getLista().size() > 0) {
+            if (new ObradaMomcad().getLista().size() > 0) {
                 lblPoruka.setText("Uspješno, startam program..");
                 for (int i = 50; i <= 100; i++) {
                     jProgressBar1.setValue(i);
