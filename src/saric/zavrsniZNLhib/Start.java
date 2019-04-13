@@ -32,15 +32,16 @@ public class Start {
 //                ObradaIgrac os = new ObradaIgrac();
 //
 //        Igr s = null;
+//        ObradaSudac os = new ObradaSudac();
 //        List<Sudac> lista = new ArrayList<>();
 //        Faker f = new Faker();
 //        GregorianCalendar v = new GregorianCalendar(1993, 10, 10);
 //        Date d = new Date();
 //        d.setTime(v.getTimeInMillis());
-//        s.setDatumrodenja(d);
-//        for (int i = 0; i < 100; i++) {
+//        
+//        for (int i = 0; i < 10; i++) {
 //
-//            s = new Sudac();
+//            Sudac s = new Sudac();
 //            s.setIme(f.name().firstName());
 //            s.setPrezime(f.name().lastName());
 //            s.setBroj_licence("321312");
@@ -55,7 +56,7 @@ public class Start {
 //            } catch (ZavrsniZNLhibException ex) {
 //                ex.printStackTrace();
 //            }
-//        }
+//        
 
 
 //        ObradaIgrac oi = new ObradaIgrac();

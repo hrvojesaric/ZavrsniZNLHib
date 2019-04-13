@@ -126,6 +126,11 @@ public class Igraci extends javax.swing.JFrame {
 
         chbLimitator.setSelected(true);
         chbLimitator.setText("Limitiraj na 50 rezultata");
+        chbLimitator.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbLimitatorActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Momčad");
 
@@ -366,6 +371,10 @@ public class Igraci extends javax.swing.JFrame {
         ucitajEntitete();
         // }
     }//GEN-LAST:event_txtUvjetKeyReleased
+
+    private void chbLimitatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbLimitatorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chbLimitatorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

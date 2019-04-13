@@ -27,14 +27,24 @@ public class ObradaSudac extends Obrada<Sudac> implements ObradaSucelje<Sudac> {
         return HibernateUtil.getSession().createQuery("from Sudac").list();
     }
 
-    public List<Sudac> getLista(String uvjet, boolean isSelected) {
+    public List<Sudac> getListaU(String uvjet) {
 
         Query query = HibernateUtil.getSession().createQuery("from Sudac a "
                 + " where concat(a.ime,' ',a.prezime) like :uvjet")
                 .setString("uvjet", "%" + uvjet + "%");
-        if (isSelected) {
-            query.setMaxResults(50);
-        }
+        
+        query.setMaxResults(10);
+
+        return query.list();
+    }
+    
+    public List<Sudac> getLista(String uvjet) {
+
+        Query query = HibernateUtil.getSession().createQuery("from Sudac a "
+                + " where concat(a.ime,' ',a.prezime) like :uvjet")
+                .setString("uvjet", "%" + uvjet + "%");
+        
+        
 
         return query.list();
     }

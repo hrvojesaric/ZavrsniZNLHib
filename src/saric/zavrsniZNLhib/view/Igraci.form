@@ -209,6 +209,9 @@
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Limitiraj na 50 rezultata"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chbLimitatorActionPerformed"/>
+      </Events>
     </Component>
     <Component class="com.github.lgooddatepicker.components.DatePicker" name="dpcDatumRodenja">
     </Component>

@@ -38,6 +38,16 @@ public class Utakmica extends Entitet implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date pocetak;
     
+    private String naziv;
+
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+    
     private String rezultat;
     
      @OneToMany(mappedBy = "utakmica")
@@ -109,6 +119,13 @@ public class Utakmica extends Entitet implements Serializable {
     public void setRezultat(String rezultat) {
         this.rezultat = rezultat;
     }
+    
+     @Override
+    public String toString() {
+       return getNaziv();
+    }
+    
+    
     
     
    

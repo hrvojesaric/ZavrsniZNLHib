@@ -23,7 +23,7 @@ public class ObradaUtakmica extends Obrada<Utakmica> implements ObradaSucelje<Ut
 
     @Override
     public List<Utakmica> getLista() {
-    return HibernateUtil.getSession().createQuery("from Urakmica").list();
+    return HibernateUtil.getSession().createQuery("from Utakmica").list();
     }
 
     @Override

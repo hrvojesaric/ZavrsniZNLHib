@@ -112,4 +112,8 @@ public class Momcad extends Entitet implements Serializable {
     public String toString() {
        return getNaziv();
     }
+    
+    public String toStadion(){
+        return getStadion();
+    }
 }
