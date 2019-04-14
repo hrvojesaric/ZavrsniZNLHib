@@ -6,22 +6,67 @@
 
 package saric.zavrsniZNLhib.view;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import saric.zavrsniZNLhib.controller.ObradaDogadaj;
+import saric.zavrsniZNLhib.controller.ObradaUtakmica;
+import saric.zavrsniZNLhib.controller.ObradaVrstaDogadaja;
+import saric.zavrsniZNLhib.model.Dogadaj;
+import saric.zavrsniZNLhib.model.Momcad;
+import saric.zavrsniZNLhib.model.Sudac;
+import saric.zavrsniZNLhib.model.Utakmica;
+import saric.zavrsniZNLhib.model.VrstaDogadaja;
+import saric.zavrsniZNLhib.pomocno.ZavrsniZNLhibException;
 
 /**
  *
  * @author Hrvoje-PC
  */
 public class Dogadaji extends javax.swing.JFrame {
+    
+     private final ObradaUtakmica obradaEntitet;
+     private final ObradaDogadaj obradaDogadaj;   
+     private static DefaultComboBoxModel<VrstaDogadaja> modelVrstaDogadaja;
+    
 
     /** Creates new form Dogadaji */
     public Dogadaji() {
         initComponents();
         
+        obradaEntitet = new ObradaUtakmica();
+        obradaDogadaj = new ObradaDogadaj();
+        
      jRadioButton1.setText("Domaćin");
      jRadioButton1.setSelected(true);
      jRadioButton2.setText("Gost");
     
+     DefaultComboBoxModel<VrstaDogadaja> ms = new DefaultComboBoxModel<>();
+        VrstaDogadaja vd = new VrstaDogadaja();
+        vd.setSifra(-1);
+        vd.setNaziv("Odaberite vrstu događaja");
+        ms.addElement(vd);
+        new ObradaVrstaDogadaja().getLista().forEach((s) -> {
+            ms.addElement(s);
+        });
+        cmbVrstaDogadaja.setModel(ms);
+        
+        ucitajPodatke();
+        
+    }
+    
+    private void ucitajPodatke() {
+        DefaultListModel<Utakmica> m = new DefaultListModel<>();
+        obradaEntitet.getLista().forEach((g) -> {
+            m.addElement(g);
+        });
+        lstEntiteti.setModel(m);
+        
+        
     }
 
     /** This method is called from within the constructor to
@@ -44,26 +89,29 @@ public class Dogadaji extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtMinuta = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstDogadaji = new javax.swing.JList<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnDodaj = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lstEntiteti.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstEntitetiValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstEntiteti);
-
-        cmbVrstaDogadaja.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         txtOpisDogadaja.setColumns(20);
         txtOpisDogadaja.setRows(5);
         jScrollPane2.setViewportView(txtOpisDogadaja);
 
-        jLabel1.setText("Opis događaja");
+        jLabel1.setText("Opis događaja :");
 
         jLabel2.setText("Vrsta događaja");
 
@@ -80,20 +128,30 @@ public class Dogadaji extends javax.swing.JFrame {
 
         jLabel3.setText("Minuta događaja");
 
-        jScrollPane3.setViewportView(jList1);
+        jScrollPane3.setViewportView(lstDogadaji);
 
         jLabel4.setText("Utakmice");
 
         jLabel5.setText("Popis događaja");
 
-        jButton1.setText("Dodaj");
-
-        jButton2.setText("Obriši");
-
-        jButton3.setText("Promjeni");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnDodajActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
+
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
             }
         });
 
@@ -118,7 +176,7 @@ public class Dogadaji extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtMinuta, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE))
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
@@ -126,14 +184,14 @@ public class Dogadaji extends javax.swing.JFrame {
                             .addComponent(cmbVrstaDogadaja, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)))
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDodaj)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnPromjeni)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnObrisi)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,16 +218,16 @@ public class Dogadaji extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButton2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtMinuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)))
+                            .addComponent(btnDodaj)
+                            .addComponent(btnObrisi)
+                            .addComponent(btnPromjeni)))
                     .addComponent(jScrollPane1))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
@@ -182,30 +240,143 @@ public class Dogadaji extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+        Dogadaj dogadaj = lstDogadaji.getSelectedValue();
 
+        if (dogadaj == null) {
+            JOptionPane.showConfirmDialog(null, "Prvo odaberite događaj");
+        }
 
+        preuzmiVrijednosti(dogadaj);
+
+        try {
+            obradaDogadaj.spremi(dogadaj);
+        } catch (ZavrsniZNLhibException e) {
+            JOptionPane.showConfirmDialog(null, e.getMessage());
+            return;
+        }
+
+        ucitajEntitete();
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void lstEntitetiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitetiValueChanged
+        Utakmica entitet = lstEntiteti.getSelectedValue();
+        if (entitet == null) {
+            return;
+        }
+        
+        jRadioButton1.setText(lstEntiteti.getSelectedValue().getDomaci().toString());
+        jRadioButton2.setText(lstEntiteti.getSelectedValue().getGosti().toString());
+        
+         
+        ucitajEntitete();
+
+       
+           
+    }//GEN-LAST:event_lstEntitetiValueChanged
+
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+        Dogadaj dogadaj = new Dogadaj();
+
+        preuzmiVrijednosti(dogadaj);
+
+        try {
+            obradaDogadaj.spremi(dogadaj);
+        } catch (ZavrsniZNLhibException e) {
+            JOptionPane.showConfirmDialog(null, e.getMessage());
+            return;
+        }
+
+        ucitajEntitete();
+    }//GEN-LAST:event_btnDodajActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        Dogadaj dogadaj = lstDogadaji.getSelectedValue();
+
+        if (dogadaj == null) {
+            JOptionPane.showConfirmDialog(null, "Prvo odaberite događaj");
+        }
+
+        try {
+            obradaDogadaj.obrisi(dogadaj);
+            ucitajEntitete();
+            
+        } catch (ZavrsniZNLhibException ex) {
+            JOptionPane.showMessageDialog(null, "Ne mogu obrisati");
+        }
+    
+    }//GEN-LAST:event_btnObrisiActionPerformed
+ private void ucitajEntitete() {
+ DefaultListModel<Dogadaj> d = new DefaultListModel<>();
+        obradaDogadaj.getLista().forEach((g) -> {
+            if(lstEntiteti.getSelectedValue().getSifra()==g.getUtakmica().getSifra()){
+                d.addElement(g);
+            }
+        });
+        if(!d.isEmpty()){
+        lstDogadaji.setModel(d);
+        
+        jRadioButton1.setText(lstEntiteti.getSelectedValue().getDomaci().toString());
+        jRadioButton2.setText(lstEntiteti.getSelectedValue().getGosti().toString());
+        if(lstDogadaji.getSelectedValue().getMomcad().getSifra()== lstEntiteti.getSelectedValue().getDomaci().getSifra()){
+            jRadioButton1.setSelected(true);
+        }else{
+            jRadioButton2.setSelected(true);
+        }
+       txtMinuta.setText(lstDogadaji.getSelectedValue().getVrijeme());
+       txtOpisDogadaja.setText(lstDogadaji.getSelectedValue().getOpis());
+       
+       modelVrstaDogadaja = (DefaultComboBoxModel<VrstaDogadaja>) cmbVrstaDogadaja.getModel();
+        for (int i = 0; i < modelVrstaDogadaja.getSize(); i++) {
+            if (modelVrstaDogadaja.getElementAt(i).getSifra() ==
+                    lstDogadaji.getSelectedValue().getVrstadogadaja().getSifra()) {
+                cmbVrstaDogadaja.setSelectedIndex(i);
+                break;
+            }}
+        }
+ }
+private Momcad postMom(){
+    Momcad momcad = new Momcad();
+    if(jRadioButton1.isSelected()){
+        momcad = lstEntiteti.getSelectedValue().getDomaci();
+    }
+    else{
+        momcad = lstEntiteti.getSelectedValue().getGosti();
+    }
+    return momcad;
+}
+  private void preuzmiVrijednosti(Dogadaj d) {
+      
+      d.setNaziv(cmbVrstaDogadaja.getSelectedItem().toString()+" ");
+      d.setMomcad(postMom());
+      d.setUtakmica(lstEntiteti.getSelectedValue());
+      d.setVrstadogadaja((VrstaDogadaja) cmbVrstaDogadaja.getSelectedItem());
+      d.setVrijeme(txtMinuta.getText());
+      d.setOpis(txtOpisDogadaja.getText());
+       
+        
+        
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cmbVrstaDogadaja;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<VrstaDogadaja> cmbVrstaDogadaja;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JList<String> lstEntiteti;
+    private javax.swing.JList<Dogadaj> lstDogadaji;
+    private javax.swing.JList<Utakmica> lstEntiteti;
+    private javax.swing.JTextField txtMinuta;
     private javax.swing.JTextArea txtOpisDogadaja;
     // End of variables declaration//GEN-END:variables
 

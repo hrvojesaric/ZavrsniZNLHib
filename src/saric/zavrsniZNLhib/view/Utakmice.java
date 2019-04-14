@@ -568,7 +568,7 @@ public class Utakmice extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbDPomocniActionPerformed
 
     private void cmbDomacinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDomacinActionPerformed
-        
+       
     }//GEN-LAST:event_cmbDomacinActionPerformed
 
     private void btnDogadajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDogadajActionPerformed

@@ -46,8 +46,11 @@ public class ObradaDogadaj extends Obrada<Dogadaj> implements ObradaSucelje<Doga
         if(d.getOpis().trim().isEmpty()){
             throw new ZavrsniZNLhibException("Opis nije unesen");
         }
-        if(d.getVrijeme()==0 && d.getVrijeme()>130){
-            throw new ZavrsniZNLhibException("Netočan unos vremena");
+        if(d.getVrijeme()==null){
+            throw new ZavrsniZNLhibException("Vrijeme nije definirano");
+        }
+        if(d.getVrijeme().trim().isEmpty()){
+            throw new ZavrsniZNLhibException("Vrijeme nije uneseno");
         }
         
         

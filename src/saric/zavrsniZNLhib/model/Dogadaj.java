@@ -26,6 +26,16 @@ public class Dogadaj extends Entitet implements Serializable {
     
     private String opis;
     
+    private String naziv;
+
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+    
     private String vrijeme;
     
     @ManyToOne
@@ -73,5 +83,9 @@ public class Dogadaj extends Entitet implements Serializable {
         this.vrsta_dogadaja = vrstadogadaja;
     }
     
+      @Override
+    public String toString() {
+       return getNaziv();
+    }
     
 }

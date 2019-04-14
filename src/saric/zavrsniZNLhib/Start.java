@@ -12,10 +12,12 @@ import saric.zavrsniZNLhib.controller.ObradaIgrac;
 import saric.zavrsniZNLhib.controller.ObradaMomcad;
 import saric.zavrsniZNLhib.controller.ObradaOperater;
 import saric.zavrsniZNLhib.controller.ObradaSudac;
+import saric.zavrsniZNLhib.controller.ObradaVrstaDogadaja;
 import saric.zavrsniZNLhib.model.Igrac;
 import saric.zavrsniZNLhib.model.Momcad;
 import saric.zavrsniZNLhib.model.Operater;
 import saric.zavrsniZNLhib.model.Sudac;
+import saric.zavrsniZNLhib.model.VrstaDogadaja;
 import saric.zavrsniZNLhib.pomocno.BCrypt;
 import saric.zavrsniZNLhib.pomocno.HibernateUtil;
 import saric.zavrsniZNLhib.pomocno.ZavrsniZNLhibException;
@@ -27,6 +29,7 @@ public class Start {
 
     public static void main(String[] args) {
         new SplashScreen().setVisible(true);
+        
 //        HibernateUtil.getSession();
 
 //                ObradaIgrac os = new ObradaIgrac();
@@ -87,6 +90,16 @@ public class Start {
 //        }
         
 
+//        VrstaDogadaja vd = new VrstaDogadaja();
+//        vd.setNaziv("Kazneni udarac");
+//        ObradaVrstaDogadaja ovd =new ObradaVrstaDogadaja();
+//        
+//        try {
+//            ovd.spremi(vd);
+//        } catch (Exception e) {
+//        }
+            
+           
 //        Operater o = new Operater();
 //      o.setEmail("default@gmail.com");
 //      o.setLozinka(BCrypt.hashpw("default", BCrypt.gensalt()));
