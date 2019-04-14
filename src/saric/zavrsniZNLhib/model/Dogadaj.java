@@ -26,7 +26,7 @@ public class Dogadaj extends Entitet implements Serializable {
     
     private String opis;
     
-    private int vrijeme;
+    private String vrijeme;
     
     @ManyToOne
     private VrstaDogadaja vrsta_dogadaja;
@@ -55,13 +55,15 @@ public class Dogadaj extends Entitet implements Serializable {
         this.opis = opis;
     }
 
-    public int getVrijeme() {
+    public String getVrijeme() {
         return vrijeme;
     }
 
-    public void setVrijeme(int vrijeme) {
+    public void setVrijeme(String vrijeme) {
         this.vrijeme = vrijeme;
     }
+
+  
 
     public VrstaDogadaja getVrstadogadaja() {
         return vrsta_dogadaja;

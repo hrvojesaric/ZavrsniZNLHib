@@ -247,6 +247,11 @@ public class Utakmice extends javax.swing.JFrame {
         });
 
         btnDogadaj.setText("Pogledaj događaje");
+        btnDogadaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDogadajActionPerformed(evt);
+            }
+        });
 
         txtUvjetPP.setText("---->Pronađi suca<----");
         txtUvjetPP.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -414,7 +419,8 @@ public class Utakmice extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnDodaj)
                                     .addComponent(btnPromjena)
-                                    .addComponent(btnBrisanje)))))))
+                                    .addComponent(btnBrisanje))))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -564,6 +570,10 @@ public class Utakmice extends javax.swing.JFrame {
     private void cmbDomacinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDomacinActionPerformed
         
     }//GEN-LAST:event_cmbDomacinActionPerformed
+
+    private void btnDogadajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDogadajActionPerformed
+       new Dogadaji().setVisible(true);
+    }//GEN-LAST:event_btnDogadajActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
