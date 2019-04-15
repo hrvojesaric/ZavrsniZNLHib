@@ -32,6 +32,7 @@ public class Dogadaji extends javax.swing.JFrame {
      private final ObradaUtakmica obradaEntitet;
      private final ObradaDogadaj obradaDogadaj;   
      private static DefaultComboBoxModel<VrstaDogadaja> modelVrstaDogadaja;
+     private Dogadaj dogadaj;
     
 
     /** Creates new form Dogadaji */
@@ -128,6 +129,11 @@ public class Dogadaji extends javax.swing.JFrame {
 
         jLabel3.setText("Minuta događaja");
 
+        lstDogadaji.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstDogadajiValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(lstDogadaji);
 
         jLabel4.setText("Utakmice");
@@ -260,8 +266,11 @@ public class Dogadaji extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPromjeniActionPerformed
 
     private void lstEntitetiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitetiValueChanged
+        txtMinuta.setText("");
+        txtOpisDogadaja.setText("");
         Utakmica entitet = lstEntiteti.getSelectedValue();
         if (entitet == null) {
+            
             return;
         }
         
@@ -306,23 +315,53 @@ public class Dogadaji extends javax.swing.JFrame {
         }
     
     }//GEN-LAST:event_btnObrisiActionPerformed
+
+    private void lstDogadajiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstDogadajiValueChanged
+        ucitajDogadaje();
+    }//GEN-LAST:event_lstDogadajiValueChanged
  private void ucitajEntitete() {
+    
  DefaultListModel<Dogadaj> d = new DefaultListModel<>();
         obradaDogadaj.getLista().forEach((g) -> {
             if(lstEntiteti.getSelectedValue().getSifra()==g.getUtakmica().getSifra()){
                 d.addElement(g);
             }
         });
-        if(!d.isEmpty()){
-        lstDogadaji.setModel(d);
+        dogadaj=lstDogadaji.getSelectedValue();
+        if(d.isEmpty()){
+            
+            DefaultListModel<Dogadaj> dog = new DefaultListModel<>();
+            Dogadaj dg = new Dogadaj();
+        dg.setSifra(-2);
+        dg.setNaziv("Nema događaja na utakmici");
+        dg.setVrijeme("");
+        dg.setOpis("");
         
+        new ObradaDogadaj().getLista().forEach((p) -> {
+            dog.addElement(p);
+        });
+        lstDogadaji.setModel(dog);
+            return;
+        }
+        lstDogadaji.setModel(d);
+         
+ }
+ 
+ private void ucitajDogadaje(){
+     dogadaj=lstDogadaji.getSelectedValue();
+     if(dogadaj==null){
+     return;}
+      
         jRadioButton1.setText(lstEntiteti.getSelectedValue().getDomaci().toString());
         jRadioButton2.setText(lstEntiteti.getSelectedValue().getGosti().toString());
-        if(lstDogadaji.getSelectedValue().getMomcad().getSifra()== lstEntiteti.getSelectedValue().getDomaci().getSifra()){
+        
+             if(lstDogadaji.getSelectedValue().getMomcad().getSifra()== lstEntiteti.getSelectedValue().getDomaci().getSifra()){
             jRadioButton1.setSelected(true);
         }else{
             jRadioButton2.setSelected(true);
         }
+        
+
        txtMinuta.setText(lstDogadaji.getSelectedValue().getVrijeme());
        txtOpisDogadaja.setText(lstDogadaji.getSelectedValue().getOpis());
        
@@ -333,7 +372,7 @@ public class Dogadaji extends javax.swing.JFrame {
                 cmbVrstaDogadaja.setSelectedIndex(i);
                 break;
             }}
-        }
+     
  }
 private Momcad postMom(){
     Momcad momcad = new Momcad();
@@ -347,7 +386,7 @@ private Momcad postMom(){
 }
   private void preuzmiVrijednosti(Dogadaj d) {
       
-      d.setNaziv(cmbVrstaDogadaja.getSelectedItem().toString()+" ");
+      d.setNaziv(txtMinuta.getText()+" "+cmbVrstaDogadaja.getSelectedItem().toString());
       d.setMomcad(postMom());
       d.setUtakmica(lstEntiteti.getSelectedValue());
       d.setVrstadogadaja((VrstaDogadaja) cmbVrstaDogadaja.getSelectedItem());
