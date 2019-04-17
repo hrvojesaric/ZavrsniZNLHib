@@ -117,6 +117,11 @@ public class Login extends javax.swing.JFrame {
         btnRegistracija.setBounds(330, 247, 130, 23);
 
         btnAbout.setText("Želiš saznati više o aplikaciji?");
+        btnAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAboutActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAbout);
         btnAbout.setBounds(240, 280, 220, 23);
 
@@ -171,6 +176,11 @@ public class Login extends javax.swing.JFrame {
         new Register().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRegistracijaActionPerformed
+
+    private void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
+        new About().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnAboutActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

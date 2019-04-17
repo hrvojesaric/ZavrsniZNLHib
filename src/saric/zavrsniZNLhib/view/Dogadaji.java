@@ -297,6 +297,7 @@ public class Dogadaji extends javax.swing.JFrame {
         }
 
         ucitajEntitete();
+        ucitajDogadaje();
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
@@ -386,7 +387,7 @@ private Momcad postMom(){
 }
   private void preuzmiVrijednosti(Dogadaj d) {
       
-      d.setNaziv(txtMinuta.getText()+" "+cmbVrstaDogadaja.getSelectedItem().toString());
+      d.setNaziv("Min : "+txtMinuta.getText()+" ; "+cmbVrstaDogadaja.getSelectedItem().toString());
       d.setMomcad(postMom());
       d.setUtakmica(lstEntiteti.getSelectedValue());
       d.setVrstadogadaja((VrstaDogadaja) cmbVrstaDogadaja.getSelectedItem());
