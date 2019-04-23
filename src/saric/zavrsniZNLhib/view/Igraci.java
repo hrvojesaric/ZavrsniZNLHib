@@ -336,7 +336,7 @@ public class Igraci extends javax.swing.JFrame {
     }
     private void ocistiPolja() {
        
-        dpcDatumRodenja.setDate(LocalDate.of(1995, 1, 1));
+        dpcDatumRodenja.setDate(null);
         txtIme.setText("");
         txtPrezime.setText("");
         txtBrojregistracije.setText("");
@@ -441,7 +441,7 @@ public class Igraci extends javax.swing.JFrame {
         Igrac entitet = lstEntiteti.getSelectedValue();
 
         if (entitet == null) {
-            JOptionPane.showConfirmDialog(null, "Prvo odaberite igrača");
+            JOptionPane.showMessageDialog(null, "Prvo odaberite igrača");
         }
 
         try {
@@ -449,7 +449,9 @@ public class Igraci extends javax.swing.JFrame {
             ucitajEntitete();
             ocistiPolja();
         } catch (ZavrsniZNLhibException ex) {
-            JOptionPane.showMessageDialog(null, "Ne mogu obrisati");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return;
+            
         }
 
     }//GEN-LAST:event_btnBrisanjeActionPerformed

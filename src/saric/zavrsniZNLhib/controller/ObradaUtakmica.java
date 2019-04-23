@@ -37,6 +37,7 @@ public class ObradaUtakmica extends Obrada<Utakmica> implements ObradaSucelje<Ut
         if(!ut.getDogadajiUtakmica().isEmpty()){
             throw new ZavrsniZNLhibException("Ne možete obrisati utakmicu jer su se na njoj događali događaji");
         }
+        
         dao.delete(ut);
     }
 
@@ -48,6 +49,30 @@ public class ObradaUtakmica extends Obrada<Utakmica> implements ObradaSucelje<Ut
         if(ut.getRezultat().trim().isEmpty()){
             throw new ZavrsniZNLhibException("Rezultat nije unesen");
         }
+        
+        if(ut.getPocetak()==null){
+            throw new ZavrsniZNLhibException("Datum početka nije definiran");
+        }
+        if(ut.getPocetak().toString().trim().isEmpty()){
+            throw new ZavrsniZNLhibException("Datum početka nije unesen");
+        }
+        if(ut.getGlavni_sudac()==null || ut.getPrvi_pomocni()==null || ut.getDrugi_pomocni()==null){
+            throw new ZavrsniZNLhibException("Suci nisu odabrani");
+        }
+        if(ut.getGlavni_sudac().toString().equals(ut.getPrvi_pomocni().toString()) ||
+                ut.getGlavni_sudac().toString().equals(ut.getDrugi_pomocni().toString()) ||
+                ut.getGlavni_sudac().toString().equals(ut.getPrvi_pomocni().toString())){
+            throw new ZavrsniZNLhibException("Suci moraju biti različiti");
+        }
+        if(ut.getDomaci().toString().equals("Odaberite momčad") || ut.getGosti().toString().equals("Odaberite momčad")){
+            throw new ZavrsniZNLhibException("Morate odabrati momčadi");
+        }
+        
+        if(ut.getDomaci().toString().equals(ut.getGosti().toString())){
+            throw new ZavrsniZNLhibException("Momčadi moraju biti različite");
+        }
+        
+        
 
     }
     

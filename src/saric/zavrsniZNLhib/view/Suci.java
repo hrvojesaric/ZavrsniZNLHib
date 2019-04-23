@@ -54,6 +54,7 @@ public class Suci extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtBrojLicence = new javax.swing.JTextField();
         dpcDatumRodenja = new com.github.lgooddatepicker.components.DatePicker();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Suci");
@@ -96,7 +97,14 @@ public class Suci extends javax.swing.JFrame {
 
         jLabel4.setText("Broj licence");
 
-        txtBrojLicence.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtBrojLicence.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        jButton1.setText("Očisti polja");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,7 +128,8 @@ public class Suci extends javax.swing.JFrame {
                     .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(txtBrojLicence, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dpcDatumRodenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(dpcDatumRodenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +152,9 @@ public class Suci extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dpcDatumRodenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnPromjena)
                             .addComponent(btnDodaj)
@@ -185,24 +196,21 @@ public class Suci extends javax.swing.JFrame {
         txtIme.setText("");
         txtPrezime.setText("");
         txtBrojLicence.setText("");
-        dpcDatumRodenja.setDate(LocalDate.of(1995, 1, 1));
+        dpcDatumRodenja.setDate(null);
 
     }
 
     private void preuzmiVrijednosti(Sudac entitet) {
 
-        GregorianCalendar gdate = new GregorianCalendar();
-        LocalDate ldate = dpcDatumRodenja.getDate();
-        Integer godina = ldate.getYear();
-        Integer mjesec = ldate.getMonthValue();
-        Integer dan = ldate.getDayOfMonth();
-        gdate.set(godina, (mjesec - 1), dan);
-        Date date = new Date();
-        date.setTime(gdate.getTimeInMillis());
+        try {
+            Date date = Date.from(dpcDatumRodenja.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            entitet.setDatumrodenja(date);
+        } catch (Exception e) {
+            entitet.setDatumrodenja(null);
+        }
 
         entitet.setIme(txtIme.getText());
         entitet.setPrezime(txtPrezime.getText());
-        entitet.setDatumrodenja(date);
         entitet.setBroj_licence(txtBrojLicence.getText());
 
     }
@@ -214,7 +222,7 @@ public class Suci extends javax.swing.JFrame {
         try {
             obradaEntitet.spremi(entitet);
         } catch (ZavrsniZNLhibException e) {
-            JOptionPane.showConfirmDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
 
@@ -227,7 +235,7 @@ public class Suci extends javax.swing.JFrame {
         Sudac entitet = lstEntiteti.getSelectedValue();
 
         if (entitet == null) {
-            JOptionPane.showConfirmDialog(null, "Prvo odaberite polaznika");
+            JOptionPane.showMessageDialog(null, "Prvo odaberite polaznika");
         }
 
         preuzmiVrijednosti(entitet);
@@ -235,7 +243,7 @@ public class Suci extends javax.swing.JFrame {
         try {
             obradaEntitet.spremi(entitet);
         } catch (ZavrsniZNLhibException e) {
-            JOptionPane.showConfirmDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
 
@@ -248,7 +256,7 @@ public class Suci extends javax.swing.JFrame {
         Sudac entitet = lstEntiteti.getSelectedValue();
 
         if (entitet == null) {
-            JOptionPane.showConfirmDialog(null, "Prvo odaberite smjer");
+            JOptionPane.showMessageDialog(null, "Prvo odaberite smjer");
         }
 
         try {
@@ -260,12 +268,17 @@ public class Suci extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBrisanjeActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ocistiPolja();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBrisanje;
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnPromjena;
     private com.github.lgooddatepicker.components.DatePicker dpcDatumRodenja;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

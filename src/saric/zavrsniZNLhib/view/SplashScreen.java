@@ -84,6 +84,7 @@ public class SplashScreen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("2. ŽNL Požeško - slavonska");
         setType(java.awt.Window.Type.POPUP);
 
         lblPoruka.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

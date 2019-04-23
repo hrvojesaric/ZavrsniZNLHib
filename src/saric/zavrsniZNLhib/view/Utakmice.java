@@ -44,33 +44,29 @@ public class Utakmice extends javax.swing.JFrame {
 
         obradaEntitet = new ObradaUtakmica();
         obradaSudac = new ObradaSudac();
-        
-        ocistiPolja();
+
         ucitajEntitete();
+        txtRezultat.setText("0 : 0");
         DefaultComboBoxModel<Momcad> md = new DefaultComboBoxModel<>();
         Momcad smd = new Momcad();
         smd.setSifra(0);
-        smd.setNaziv("Odaberite momcad");
+        smd.setNaziv("Odaberite momčad");
         md.addElement(smd);
         new ObradaMomcad().getLista().forEach((s) -> {
             md.addElement(s);
         });
         cmbDomacin.setModel(md);
+        
 
         DefaultComboBoxModel<Momcad> mg = new DefaultComboBoxModel<>();
         Momcad smg = new Momcad();
         smg.setSifra(0);
-        smg.setNaziv("Odaberite momcad");
+        smg.setNaziv("Odaberite momčad");
         mg.addElement(smg);
         new ObradaMomcad().getLista().forEach((s) -> {
             mg.addElement(s);
         });
         cmbGost.setModel(mg);
-        
-        
-      
-
-        
 
     }
 
@@ -81,52 +77,53 @@ public class Utakmice extends javax.swing.JFrame {
         });
         lstEntiteti.setModel(m);
     }
-    
+
     private void preuzmiVrijednosti(Utakmica u) {
-        GregorianCalendar gdate = new GregorianCalendar();
-        LocalDate ldate = dpDatumOdigravanja.getDate();
-        Integer godina = ldate.getYear();
-        Integer mjesec = ldate.getMonthValue();
-        Integer dan = ldate.getDayOfMonth();
-        gdate.set(godina, (mjesec - 1), dan);
-        Date date = new Date();
-        date.setTime(gdate.getTimeInMillis());
-        
-        u.setNaziv(cmbDomacin.getSelectedItem().toString()+" - "+cmbGost.getSelectedItem().toString()
-                +" ( "+txtRezultat.getText()+" )");
-        u.setDomaci((Momcad)cmbDomacin.getSelectedItem());
-        u.setGosti((Momcad)cmbGost.getSelectedItem());
+        try {
+            Date date = Date.from(dpDatumOdigravanja.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            u.setPocetak(date);
+        } catch (Exception e) {
+            u.setPocetak(null);
+        }
+
+        u.setNaziv(cmbDomacin.getSelectedItem().toString() + " - " + cmbGost.getSelectedItem().toString()
+                + " ( " + txtRezultat.getText() + " )");
+        u.setDomaci((Momcad) cmbDomacin.getSelectedItem());
+        u.setGosti((Momcad) cmbGost.getSelectedItem());
         u.setGlavni_sudac((Sudac) cmbGSudac.getSelectedItem());
         u.setPrvi_pomocni((Sudac) cmbPPomocni.getSelectedItem());
         u.setDrugi_pomocni((Sudac) cmbDPomocni.getSelectedItem());
         u.setRezultat(txtRezultat.getText());
-        u.setPocetak(date);
-        
+
     }
-    
-  
-    
-    private void ocistiPolja(){
-        dpDatumOdigravanja.setDate(LocalDate.now(ZoneId.systemDefault()));
+
+    private void ocistiPolja() {
+        dpDatumOdigravanja.setDate(null);
         txtRezultat.setText("0 : 0");
-        
-       
+
         txtUvjetDP.setText("---->Pronađi suca<----");
         txtUvjetGS.setText("---->Pronađi suca<----");
         txtUvjetPP.setText("---->Pronađi suca<----");
+        cmbDPomocni.setSelectedItem(null);
+        cmbPPomocni.setSelectedItem(null);
+        cmbGSudac.setSelectedItem(null);
+        cmbDomacin.setSelectedIndex(0);
+        cmbGost.setSelectedIndex(0);
         txtGSudac.setText("");
         txtPPomocni.setText("");
         txtDPomocni.setText("");
+        lblStadion.setText("");
+        lstEntiteti.setSelectedValue(null, false);
     }
-    
-     private void ucitajEntitete() {
-        
-            DefaultListModel<Utakmica> u = new DefaultListModel<>();
-            for (Utakmica s : obradaEntitet.getLista()) {
-                u.addElement(s);
-            }
-            lstEntiteti.setModel(u);
-     }
+
+    private void ucitajEntitete() {
+
+        DefaultListModel<Utakmica> u = new DefaultListModel<>();
+        for (Utakmica s : obradaEntitet.getLista()) {
+            u.addElement(s);
+        }
+        lstEntiteti.setModel(u);
+    }
 //        u.setPrvi_pomocni(prvi_pomocni);
 //        u.setDrugi_pomocni(drugi_pomocni);
 //        u.setPocetak(pocetak);
@@ -139,7 +136,7 @@ public class Utakmice extends javax.swing.JFrame {
 //        }
 //        return g;
 //    }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -178,6 +175,7 @@ public class Utakmice extends javax.swing.JFrame {
         txtGSudac = new javax.swing.JTextField();
         txtPPomocni = new javax.swing.JTextField();
         txtDPomocni = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -222,6 +220,8 @@ public class Utakmice extends javax.swing.JFrame {
         jLabel7.setText("Domaćin");
 
         jLabel8.setText("Gost");
+
+        txtRezultat.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel10.setText("Rezultat");
 
@@ -295,6 +295,13 @@ public class Utakmice extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Očisti Polja");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -305,61 +312,65 @@ public class Utakmice extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtUvjetGS, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(txtUvjetPP, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(txtUvjetDP, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbGSudac, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(cmbPPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(cmbDPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblGlavni, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(152, 152, 152)
-                                .addComponent(lblDPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtUvjetGS, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23)
+                                .addComponent(txtUvjetPP, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(txtUvjetDP, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmbGSudac, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23)
+                                .addComponent(cmbPPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(cmbDPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblGlavni, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(152, 152, 152)
+                                        .addComponent(lblDPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtGSudac, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(txtDPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel7)
+                                .addGap(104, 104, 104)
+                                .addComponent(jLabel10)
+                                .addGap(113, 113, 113)
+                                .addComponent(jLabel8))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmbDomacin, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtRezultat, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(cmbGost, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblStadion, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(dpDatumOdigravanja, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtGSudac, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtPPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(txtDPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel7)
-                        .addGap(104, 104, 104)
-                        .addComponent(jLabel10)
-                        .addGap(113, 113, 113)
-                        .addComponent(jLabel8))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbDomacin, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtRezultat, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(cmbGost, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
                         .addComponent(btnDodaj)
                         .addGap(18, 18, 18)
                         .addComponent(btnPromjena)
-                        .addGap(6, 6, 6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBrisanje)
-                        .addGap(66, 66, 66)
-                        .addComponent(btnDogadaj))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblStadion, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(dpDatumOdigravanja, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(50, 50, 50)
+                        .addComponent(btnDogadaj))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,7 +380,7 @@ public class Utakmice extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel3))
                 .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,7 +406,7 @@ public class Utakmice extends javax.swing.JFrame {
                             .addComponent(txtGSudac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDPomocni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62)
+                        .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addGroup(layout.createSequentialGroup()
@@ -411,15 +422,17 @@ public class Utakmice extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cmbDomacin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtRezultat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(37, 37, 37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnDogadaj)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnDodaj)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btnPromjena)
-                                    .addComponent(btnBrisanje))))))
+                                    .addComponent(btnBrisanje)
+                                    .addComponent(btnDodaj))))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -433,11 +446,11 @@ public class Utakmice extends javax.swing.JFrame {
 
     private void txtUvjetGSKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjetGSKeyReleased
 
-     DefaultComboBoxModel<Sudac> gs = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<Sudac> gs = new DefaultComboBoxModel<>();
         for (Sudac s : obradaSudac.getListaU(txtUvjetGS.getText().trim())) {
-                gs.addElement(s);
-            }
-            cmbGSudac.setModel(gs);
+            gs.addElement(s);
+        }
+        cmbGSudac.setModel(gs);
     }//GEN-LAST:event_txtUvjetGSKeyReleased
 
     private void txtUvjetPPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUvjetPPMouseClicked
@@ -445,11 +458,11 @@ public class Utakmice extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUvjetPPMouseClicked
 
     private void txtUvjetPPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjetPPKeyReleased
-         DefaultComboBoxModel<Sudac> gs = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<Sudac> gs = new DefaultComboBoxModel<>();
         for (Sudac s : obradaSudac.getListaU(txtUvjetPP.getText().trim())) {
-                gs.addElement(s);
-            }
-            cmbPPomocni.setModel(gs);
+            gs.addElement(s);
+        }
+        cmbPPomocni.setModel(gs);
     }//GEN-LAST:event_txtUvjetPPKeyReleased
 
     private void txtUvjetDPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUvjetDPMouseClicked
@@ -457,11 +470,11 @@ public class Utakmice extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUvjetDPMouseClicked
 
     private void txtUvjetDPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjetDPKeyReleased
-         DefaultComboBoxModel<Sudac> gs = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<Sudac> gs = new DefaultComboBoxModel<>();
         for (Sudac s : obradaSudac.getListaU(txtUvjetDP.getText().trim())) {
-                gs.addElement(s);
-            }
-            cmbDPomocni.setModel(gs);
+            gs.addElement(s);
+        }
+        cmbDPomocni.setModel(gs);
     }//GEN-LAST:event_txtUvjetDPKeyReleased
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
@@ -472,7 +485,7 @@ public class Utakmice extends javax.swing.JFrame {
         try {
             obradaEntitet.spremi(entitet);
         } catch (ZavrsniZNLhibException e) {
-            JOptionPane.showConfirmDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
 
@@ -485,7 +498,7 @@ public class Utakmice extends javax.swing.JFrame {
         Utakmica entitet = lstEntiteti.getSelectedValue();
 
         if (entitet == null) {
-            JOptionPane.showConfirmDialog(null, "Prvo odaberite utakmicu");
+            JOptionPane.showMessageDialog(null, "Prvo odaberite utakmicu");
         }
 
         preuzmiVrijednosti(entitet);
@@ -493,7 +506,7 @@ public class Utakmice extends javax.swing.JFrame {
         try {
             obradaEntitet.spremi(entitet);
         } catch (ZavrsniZNLhibException e) {
-            JOptionPane.showConfirmDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
 
@@ -506,7 +519,7 @@ public class Utakmice extends javax.swing.JFrame {
         Utakmica entitet = lstEntiteti.getSelectedValue();
 
         if (entitet == null) {
-            JOptionPane.showConfirmDialog(null, "Prvo odaberite utakmicu");
+            JOptionPane.showMessageDialog(null, "Prvo odaberite utakmicu");
         }
 
         try {
@@ -519,15 +532,12 @@ public class Utakmice extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBrisanjeActionPerformed
 
     private void lstEntitetiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitetiValueChanged
-        
-        
+
         Utakmica entitet = lstEntiteti.getSelectedValue();
         if (entitet == null) {
             return;
         }
-        
 
-               
         modelDomacin = (DefaultComboBoxModel<Momcad>) cmbDomacin.getModel();
         for (int i = 0; i < modelDomacin.getSize(); i++) {
             if (modelDomacin.getElementAt(i).getSifra() == entitet.getDomaci().getSifra()) {
@@ -535,7 +545,7 @@ public class Utakmice extends javax.swing.JFrame {
                 break;
             }
         }
-        
+
         modelGost = (DefaultComboBoxModel<Momcad>) cmbGost.getModel();
         for (int i = 0; i < modelGost.getSize(); i++) {
             if (modelGost.getElementAt(i).getSifra() == entitet.getGosti().getSifra()) {
@@ -547,33 +557,45 @@ public class Utakmice extends javax.swing.JFrame {
         input.setTime(entitet.getPocetak().getTime());
         LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
+        dpDatumOdigravanja.setDate(date);
+
         txtRezultat.setText(entitet.getRezultat());
-        txtGSudac.setText(entitet.getGlavni_sudac().getIme()+" "+entitet.getGlavni_sudac().getPrezime());
-        txtPPomocni.setText(entitet.getPrvi_pomocni().getIme()+" "+entitet.getPrvi_pomocni().getPrezime());
-        txtDPomocni.setText(entitet.getDrugi_pomocni().getIme()+" "+entitet.getDrugi_pomocni().getPrezime());
-        lblStadion.setText("Stadion :       "+entitet.getDomaci().getStadion());
-       
+        txtGSudac.setText(entitet.getGlavni_sudac().getIme() + " " + entitet.getGlavni_sudac().getPrezime());
+        txtPPomocni.setText(entitet.getPrvi_pomocni().getIme() + " " + entitet.getPrvi_pomocni().getPrezime());
+        txtDPomocni.setText(entitet.getDrugi_pomocni().getIme() + " " + entitet.getDrugi_pomocni().getPrezime());
+        lblStadion.setText("Stadion :       " + entitet.getDomaci().getStadion());
+
     }//GEN-LAST:event_lstEntitetiValueChanged
 
     private void cmbGSudacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGSudacActionPerformed
-        txtGSudac.setText(cmbGSudac.getSelectedItem().toString());
+        if(cmbGSudac.getSelectedItem()!=null){
+            txtGSudac.setText(cmbGSudac.getSelectedItem().toString());
+        }
     }//GEN-LAST:event_cmbGSudacActionPerformed
 
     private void cmbPPomocniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPPomocniActionPerformed
+       if(cmbPPomocni.getSelectedItem()!=null){
         txtPPomocni.setText(cmbPPomocni.getSelectedItem().toString());
+       }
     }//GEN-LAST:event_cmbPPomocniActionPerformed
 
     private void cmbDPomocniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDPomocniActionPerformed
+        if(cmbDPomocni.getSelectedItem()!=null){
         txtDPomocni.setText(cmbDPomocni.getSelectedItem().toString());
+    }
     }//GEN-LAST:event_cmbDPomocniActionPerformed
 
     private void cmbDomacinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDomacinActionPerformed
-       
+
     }//GEN-LAST:event_cmbDomacinActionPerformed
 
     private void btnDogadajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDogadajActionPerformed
-       new Dogadaji().setVisible(true);
+        new Dogadaji().setVisible(true);
     }//GEN-LAST:event_btnDogadajActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ocistiPolja();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -587,6 +609,7 @@ public class Utakmice extends javax.swing.JFrame {
     private javax.swing.JComboBox<Momcad> cmbGost;
     private javax.swing.JComboBox<Sudac> cmbPPomocni;
     private com.github.lgooddatepicker.components.DatePicker dpDatumOdigravanja;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

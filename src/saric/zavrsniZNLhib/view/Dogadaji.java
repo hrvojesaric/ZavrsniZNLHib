@@ -250,7 +250,7 @@ public class Dogadaji extends javax.swing.JFrame {
         Dogadaj dogadaj = lstDogadaji.getSelectedValue();
 
         if (dogadaj == null) {
-            JOptionPane.showConfirmDialog(null, "Prvo odaberite događaj");
+            JOptionPane.showMessageDialog(null, "Prvo odaberite događaj");
         }
 
         preuzmiVrijednosti(dogadaj);
@@ -258,7 +258,7 @@ public class Dogadaji extends javax.swing.JFrame {
         try {
             obradaDogadaj.spremi(dogadaj);
         } catch (ZavrsniZNLhibException e) {
-            JOptionPane.showConfirmDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
 
@@ -292,7 +292,7 @@ public class Dogadaji extends javax.swing.JFrame {
         try {
             obradaDogadaj.spremi(dogadaj);
         } catch (ZavrsniZNLhibException e) {
-            JOptionPane.showConfirmDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
 
@@ -304,7 +304,7 @@ public class Dogadaji extends javax.swing.JFrame {
         Dogadaj dogadaj = lstDogadaji.getSelectedValue();
 
         if (dogadaj == null) {
-            JOptionPane.showConfirmDialog(null, "Prvo odaberite događaj");
+            JOptionPane.showMessageDialog(null, "Prvo odaberite događaj");
         }
 
         try {

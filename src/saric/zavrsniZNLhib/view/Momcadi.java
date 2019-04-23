@@ -60,6 +60,7 @@ public class Momcadi extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtFizioterapeut = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,7 +77,7 @@ public class Momcadi extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstEntiteti);
 
-        txtPredstavnikKluba.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPredstavnikKluba.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         btnDodaj.setText("Dodaj");
         btnDodaj.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +104,7 @@ public class Momcadi extends javax.swing.JFrame {
             }
         });
 
-        txtTrener.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTrener.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         lstIgraci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -116,9 +117,16 @@ public class Momcadi extends javax.swing.JFrame {
 
         jLabel6.setText("Popis Momčadi");
 
-        txtFizioterapeut.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtFizioterapeut.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         jLabel7.setText("Fizioterapeut");
+
+        jButton1.setText("Očisti polja");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,7 +154,8 @@ public class Momcadi extends javax.swing.JFrame {
                     .addComponent(txtTrener, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel7)
-                    .addComponent(txtFizioterapeut, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFizioterapeut, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -182,7 +191,9 @@ public class Momcadi extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFizioterapeut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnPromjena)
                             .addComponent(btnDodaj)
@@ -239,7 +250,7 @@ public class Momcadi extends javax.swing.JFrame {
         try {
             obradaEntitet.spremi(entitet);
         } catch (ZavrsniZNLhibException e) {
-            JOptionPane.showConfirmDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
 
@@ -252,7 +263,7 @@ public class Momcadi extends javax.swing.JFrame {
         Momcad entitet = lstEntiteti.getSelectedValue();
 
         if (entitet == null) {
-            JOptionPane.showConfirmDialog(null, "Prvo odaberite polaznika");
+            JOptionPane.showMessageDialog(null, "Prvo odaberite polaznika");
         }
 
         preuzmiVrijednosti(entitet);
@@ -260,7 +271,7 @@ public class Momcadi extends javax.swing.JFrame {
         try {
             obradaEntitet.spremi(entitet);
         } catch (ZavrsniZNLhibException e) {
-            JOptionPane.showConfirmDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
 
@@ -274,7 +285,7 @@ public class Momcadi extends javax.swing.JFrame {
         Momcad entitet = lstEntiteti.getSelectedValue();
 
         if (entitet == null) {
-            JOptionPane.showConfirmDialog(null, "Prvo odaberite smjer");
+            JOptionPane.showMessageDialog(null, "Prvo odaberite smjer");
         }
 
         try {
@@ -282,13 +293,19 @@ public class Momcadi extends javax.swing.JFrame {
             ucitajEntitete();
             ocistiPolja();
         } catch (ZavrsniZNLhibException ex) {
-            JOptionPane.showMessageDialog(null, "Ne mogu obrisati");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return;
+           
         }
     }//GEN-LAST:event_btnBrisanjeActionPerformed
 
     private void lstIgraciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstIgraciValueChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_lstIgraciValueChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ocistiPolja();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ucitajEntitete() {
 
@@ -325,6 +342,7 @@ public class Momcadi extends javax.swing.JFrame {
     private javax.swing.JButton btnBrisanje;
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnPromjena;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

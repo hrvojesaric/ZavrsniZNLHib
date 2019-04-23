@@ -11,6 +11,7 @@ import saric.zavrsniZNLhib.pomocno.ZavrsniZNLhibException;
 import saric.zavrsniZNLhib.pomocno.HibernateUtil;
 import saric.zavrsniZNLhib.pomocno.ObradaSucelje;
 import java.util.List;
+import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  *
@@ -67,12 +68,17 @@ public class ObradaOperater extends Obrada<Operater> implements ObradaSucelje<Op
         if(t.getPrezime().trim().isEmpty()){
             throw new ZavrsniZNLhibException("Prezime nije uneseno");
         }
-        
+        if(!EmailValidator.getInstance().isValid(t.getEmail())){
+            throw new ZavrsniZNLhibException("Email nije točan");
+        }
          if(t.getEmail()==null){
             throw new ZavrsniZNLhibException("Email nije definiran");
         }
         if(t.getEmail().trim().isEmpty()){
             throw new ZavrsniZNLhibException("Email nije unesen");
+        }
+        if(t.getLozinka()==null){
+            throw new ZavrsniZNLhibException("Lozinke se ne podudaraju ili nisu unesene");
         }
         
         
@@ -80,6 +86,7 @@ public class ObradaOperater extends Obrada<Operater> implements ObradaSucelje<Op
 
     @Override
     public Operater spremi(Operater t) throws ZavrsniZNLhibException {
+        kontrola(t);
         return dao.save(t);
     }
 

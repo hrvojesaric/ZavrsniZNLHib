@@ -148,33 +148,28 @@ public class Register extends javax.swing.JFrame {
         ObradaOperater oo = new ObradaOperater();
         Operater o = new Operater();
 
-        if (kontrola()) {
+        o.setIme(txtIme.getText());
+        o.setPrezime(txtPrezime.getText());
+        o.setEmail(txtEmail.getText());
 
-            if (Arrays.equals(pwdLozinka.getPassword(), pwdPonovnaLozinka.getPassword())) {
-                o.setIme(txtIme.getText());
-                o.setPrezime(txtPrezime.getText());
-                String lozinka = new String(pwdLozinka.getPassword());
-                o.setLozinka(BCrypt.hashpw(lozinka, BCrypt.gensalt()));
-                o.setEmail(txtEmail.getText());
+        if (Arrays.equals(pwdLozinka.getPassword(), pwdPonovnaLozinka.getPassword()) || pwdLozinka.toString().trim().isEmpty()) {
 
-                try {
-                    oo.spremi(o);
-
-                } catch (ZavrsniZNLhibException ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                    return;
-                }
-
-                
-                dispose();
-                new Login().setVisible(true);
-
-            } else {
-                ocistiPolja();
-                lblPoruka.setText("Lozinke se ne podudaraju. Pokušajte ponovno.");
-
-            }
+            String lozinka = new String(pwdLozinka.getPassword());
+            o.setLozinka(BCrypt.hashpw(lozinka, BCrypt.gensalt()));
         }
+
+            try {
+                oo.spremi(o);
+
+            } catch (ZavrsniZNLhibException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+                return;
+            }
+
+            dispose();
+            new Login().setVisible(true);
+
+        
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -184,35 +179,34 @@ public class Register extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_formWindowClosing
 
-    private boolean kontrola() {
-            
-        
-        if(txtIme.getText().isEmpty()){
-            lblPoruka.setText("Ime nije Uneseno");
-            return false;
-        }
-        
-        if(txtPrezime.getText().isEmpty()){
-            lblPoruka.setText("Prezime nije Uneseno");
-            return false;
-        }
-        
-        if(txtEmail.getText().isEmpty()){
-            lblPoruka.setText("Email nije Unesen");
-            return false;
-        }
-         if (pwdLozinka.getPassword().length == 0) {
-            lblPoruka.setText("Lozinka nije unesena");
-            return false;
-        }
-
-        if (pwdPonovnaLozinka.getPassword().length == 0) {
-            lblPoruka.setText("Ponovno unesite lozinku");
-            return false;
-        }
-
-        return true;
-    }
+//    private boolean kontrola() {
+//
+//        if (txtIme.getText().isEmpty()) {
+//            lblPoruka.setText("Ime nije Uneseno");
+//            return false;
+//        }
+//
+//        if (txtPrezime.getText().isEmpty()) {
+//            lblPoruka.setText("Prezime nije Uneseno");
+//            return false;
+//        }
+//
+//        if (txtEmail.getText().isEmpty()) {
+//            lblPoruka.setText("Email nije Unesen");
+//            return false;
+//        }
+//        if (pwdLozinka.getPassword().length == 0) {
+//            lblPoruka.setText("Lozinka nije unesena");
+//            return false;
+//        }
+//
+//        if (pwdPonovnaLozinka.getPassword().length == 0) {
+//            lblPoruka.setText("Ponovno unesite lozinku");
+//            return false;
+//        }
+//
+//        return true;
+//    }
 
     private void ocistiPolja() {
         txtEmail.setText("");

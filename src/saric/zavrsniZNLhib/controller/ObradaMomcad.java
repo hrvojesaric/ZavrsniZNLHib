@@ -16,8 +16,8 @@ import saric.zavrsniZNLhib.pomocno.ZavrsniZNLhibException;
  * @author Hrvoje-PC
  */
 public class ObradaMomcad extends Obrada<Momcad> implements ObradaSucelje<Momcad> {
-    
-    public ObradaMomcad (){
+
+    public ObradaMomcad() {
         super();
     }
 
@@ -34,24 +34,36 @@ public class ObradaMomcad extends Obrada<Momcad> implements ObradaSucelje<Momcad
 
     @Override
     public void obrisi(Momcad mo) throws ZavrsniZNLhibException {
-        if(!mo.getUtakmiceDomaci().isEmpty() && !mo.getUtakmiceGosti().isEmpty()){
+        if (!mo.getIgraci().isEmpty()) {
+            throw new ZavrsniZNLhibException("Momčad se ne može obrisati jer sadrži igrače");
+        }
+        if (!mo.getUtakmiceDomaci().isEmpty() && !mo.getUtakmiceGosti().isEmpty()) {
             throw new ZavrsniZNLhibException("Momčad se ne može obrisati jer je sudjelovala na utakmicama");
         }
-        if(!mo.getIgraci().isEmpty()){
-            throw new ZavrsniZNLhibException("Momčad se ne može obrisati jer sadrži igrače");
+       
+        if (!mo.getDogadaji().isEmpty()) {
+            throw new ZavrsniZNLhibException("Ne možete obrisati momčad jer sadrži događaje");
         }
         dao.delete(mo);
     }
 
     @Override
     public void kontrola(Momcad mo) throws ZavrsniZNLhibException {
-       
-        if(mo.getNaziv()==null){
+
+        if (mo.getNaziv() == null) {
             throw new ZavrsniZNLhibException("Momčad nije definirana");
         }
-        if(mo.getNaziv().trim().isEmpty()){
-            throw new ZavrsniZNLhibException("Momčad nije unesena");
+        if (mo.getNaziv().trim().isEmpty()) {
+            throw new ZavrsniZNLhibException("Morate unijeti naziv momčadi");
         }
+        
+        if (mo.getStadion()== null) {
+            throw new ZavrsniZNLhibException("Stadion nije definirana");
+        }
+        if (mo.getStadion().trim().isEmpty()) {
+            throw new ZavrsniZNLhibException("Morate unijeti naziv stadiona");
+        }
+
     }
-    
+
 }

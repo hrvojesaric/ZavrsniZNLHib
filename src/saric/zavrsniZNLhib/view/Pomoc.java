@@ -9,12 +9,12 @@ package saric.zavrsniZNLhib.view;
  *
  * @author Hrvoje-PC
  */
-public class About extends javax.swing.JFrame {
+public class Pomoc extends javax.swing.JFrame {
 
     /**
      * Creates new form About
      */
-    public About() {
+    public Pomoc() {
         initComponents();
         
     }
@@ -54,18 +54,17 @@ public class About extends javax.swing.JFrame {
 
         jLabel1.setText("Poštovani, ");
 
-        jLabel2.setText("ova aplikacija je napravljena ");
+        jLabel2.setText("nakon što je prijava uspješno");
 
-        jLabel3.setText("kao zadatak završnog rada");
+        jLabel3.setText("prošla drugim akcijama možete");
 
-        jLabel4.setText("za zanimanje \"Java programer\"");
+        jLabel4.setText("pristupiti preko gumba \"Izbornik\"");
 
-        jLabel5.setText("u školi Edunova u Osijeku.");
+        jLabel5.setText("koji se nalazi u gornjem lijevom kutu.  ");
 
-        jLabel6.setText("Za više informacija kontaktirajte na :");
+        jLabel6.setText("Za više informacija o aplikaciji pritisnite");
 
-        jLabel7.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel7.setText("hrvoje.saric93@gmail.com");
+        jLabel7.setText("gumb \"O aplikaciji\".");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,7 +96,7 @@ public class About extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(btnOK)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
