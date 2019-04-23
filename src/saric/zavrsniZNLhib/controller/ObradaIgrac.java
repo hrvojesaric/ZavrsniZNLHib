@@ -6,6 +6,7 @@
 package saric.zavrsniZNLhib.controller;
 
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import saric.zavrsniZNLhib.model.Igrac;
 import saric.zavrsniZNLhib.pomocno.HibernateUtil;
@@ -65,23 +66,30 @@ public class ObradaIgrac extends Obrada<Igrac> implements ObradaSucelje<Igrac> {
     @Override
     public void kontrola(Igrac ig) throws ZavrsniZNLhibException {
         if(ig.getIme()==null){
-            throw new ZavrsniZNLhibException("Ime nije definirano");
+            throw new ZavrsniZNLhibException("Ime nije uneseno");
         }
         if(ig.getIme().trim().isEmpty()){
-            throw new ZavrsniZNLhibException("Ime nije Uneseno");
+            throw new ZavrsniZNLhibException("Ime nije uneseno");
         }
         
         if(ig.getPrezime()==null){
-            throw new ZavrsniZNLhibException("Prezime nije definirano");
+            throw new ZavrsniZNLhibException("Prezime nije uneseno");
         }
         if(ig.getPrezime().trim().isEmpty()){
             throw new ZavrsniZNLhibException("Prezime nije uneseno");
         }
         if(ig.getBroj_licence()==null){
-            throw new ZavrsniZNLhibException("Broj licence nije definirano");
-        }
-        if(ig.getPrezime().trim().isEmpty()){
             throw new ZavrsniZNLhibException("Broj licence nije unesen");
+        }
+        if(!StringUtils.isNumeric(ig.getBroj_licence())){
+            throw new ZavrsniZNLhibException("Broj licence mora biti broj");
+        }
+        if(ig.getBroj_licence().trim().isEmpty()){
+            throw new ZavrsniZNLhibException("Broj licence nije unesen");
+        }
+        
+        if(ig.getMomcad().toString().equals("Odaberite momčad")){
+        throw new ZavrsniZNLhibException("Prvo morate odabrati momčad");
         }
         if(ig.getDatumrodenja()==null){
             throw new ZavrsniZNLhibException("Datum rođenja nije definiran");

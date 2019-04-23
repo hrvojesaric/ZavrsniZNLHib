@@ -16,6 +16,7 @@ public class About extends javax.swing.JFrame {
      */
     public About() {
         initComponents();
+        
     }
 
     /**
@@ -124,13 +125,17 @@ public class About extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+   
+    
+   
+
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        new Login().setVisible(true);
+        
         dispose();
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-     new Login().setVisible(true);
+     
         dispose();
     }//GEN-LAST:event_formWindowClosing
 

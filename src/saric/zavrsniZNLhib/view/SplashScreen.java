@@ -39,21 +39,30 @@ public class SplashScreen extends javax.swing.JFrame {
         public void run() {
 
             lblPoruka.setText("Inicijaliziram....");
-            for (int i = 1; i < 50; i++) {
+            for (int i = 1; i < 33; i++) {
                 jProgressBar1.setValue(i);
                 try {
-                    Thread.sleep(1);
+                    Thread.sleep(30);
+                } catch (InterruptedException ex) {
+                }
+            }
+            
+            lblPoruka.setText("Spajam se na bazu...");
+            for (int i = 34; i < 67; i++) {
+                jProgressBar1.setValue(i);
+                try {
+                    Thread.sleep(30);
                 } catch (InterruptedException ex) {
                 }
             }
 
-            lblPoruka.setText("Spajam se na bazu...");
-            if (new ObradaMomcad().getLista().size() > 0) {
-                lblPoruka.setText("Uspješno, startam program..");
-                for (int i = 50; i <= 100; i++) {
+            
+            if (new ObradaOperater().getLista().size() > 0) {
+                lblPoruka.setText("Pokrećem program..");
+                for (int i = 67; i <= 100; i++) {
                     jProgressBar1.setValue(i);
                     try {
-                        Thread.sleep(1);
+                        Thread.sleep(30);
                     } catch (InterruptedException ex) {
                     }
                 }
@@ -77,31 +86,36 @@ public class SplashScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setType(java.awt.Window.Type.POPUP);
 
+        lblPoruka.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPoruka.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saric/zavrsniZNLhib/view/slika_za_splash.PNG"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saric/zavrsniZNLhib/view/OccasionalNeglectedGharial-max-1mb.gif"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
             .addGroup(layout.createSequentialGroup()
-                .addGap(198, 198, 198)
-                .addComponent(lblPoruka, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(136, 136, 136)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPoruka, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel1)))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPoruka, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(33, 33, 33)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPoruka, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 52, Short.MAX_VALUE))
         );
 
         pack();

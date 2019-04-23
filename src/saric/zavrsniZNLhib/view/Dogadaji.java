@@ -323,15 +323,32 @@ public class Dogadaji extends javax.swing.JFrame {
  private void ucitajEntitete() {
     
  DefaultListModel<Dogadaj> d = new DefaultListModel<>();
-        obradaDogadaj.getLista().forEach((g) -> {
-            if(lstEntiteti.getSelectedValue().getSifra()==g.getUtakmica().getSifra()){
-                d.addElement(g);
+     DefaultListModel<Dogadaj> dog = new DefaultListModel<>();
+         if (d == null) {
+            JOptionPane.showMessageDialog(null, "Prvo odaberite utakmicu");
+            return;
+        }
+
+        lstEntiteti.getSelectedValuesList().forEach((p) -> {
+
+           
+            for (int i = 0; i < lstDogadaji.getModel().getSize(); i++) {
+                if (p.getSifra() == lstDogadaji.getModel().getElementAt(i).getSifra()) {
+                    
+                    break;
+                }
             }
+            
+
         });
-        dogadaj=lstDogadaji.getSelectedValue();
+
+        
+                
+        
+        
         if(d.isEmpty()){
             
-            DefaultListModel<Dogadaj> dog = new DefaultListModel<>();
+            
             Dogadaj dg = new Dogadaj();
         dg.setSifra(-2);
         dg.setNaziv("Nema događaja na utakmici");

@@ -89,15 +89,17 @@ public class Start {
 //            e.printStackTrace();
 //        }
         
-
+//
 //        VrstaDogadaja vd = new VrstaDogadaja();
-//        vd.setNaziv("Kazneni udarac");
+//        vd.setNaziv("Crveni Karton");
 //        ObradaVrstaDogadaja ovd =new ObradaVrstaDogadaja();
 //        
 //        try {
 //            ovd.spremi(vd);
 //        } catch (Exception e) {
 //        }
+//        
+        
             
            
 //        Operater o = new Operater();
