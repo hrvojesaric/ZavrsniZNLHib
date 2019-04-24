@@ -34,12 +34,23 @@ public class ObradaDogadaj extends Obrada<Dogadaj> implements ObradaSucelje<Doga
 
     @Override
     public void obrisi(Dogadaj d) throws ZavrsniZNLhibException {
+        if(d==null){
+            throw new ZavrsniZNLhibException("Prvo morate odabrati događaj");
+        }
+        
         dao.delete(d);
     }
 
     @Override
     public void kontrola(Dogadaj d) throws ZavrsniZNLhibException {
         
+        if(d.getMomcad()==null){
+           throw new ZavrsniZNLhibException("Niste odabrali momčad");
+        }
+        if(d.getUtakmica()==null){
+            throw new ZavrsniZNLhibException("Niste odabrali utakmicu");
+        }
+                
         if(d.getOpis()==null){
             throw new ZavrsniZNLhibException("Opis nije definiran");
         }
