@@ -6,6 +6,7 @@
 package saric.zavrsniZNLhib.controller;
 
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import saric.zavrsniZNLhib.model.Dogadaj;
 import saric.zavrsniZNLhib.pomocno.HibernateUtil;
 import saric.zavrsniZNLhib.pomocno.ObradaSucelje;
@@ -58,10 +59,21 @@ public class ObradaDogadaj extends Obrada<Dogadaj> implements ObradaSucelje<Doga
             throw new ZavrsniZNLhibException("Opis nije unesen");
         }
         if(d.getVrijeme()==null){
-            throw new ZavrsniZNLhibException("Vrijeme nije definirano");
+            throw new ZavrsniZNLhibException("Vrijeme događaja nije definirano");
         }
         if(d.getVrijeme().trim().isEmpty()){
-            throw new ZavrsniZNLhibException("Vrijeme nije uneseno");
+            throw new ZavrsniZNLhibException("Vrijeme događaja nije uneseno");
+        }
+        
+        if(!StringUtils.isNumeric(d.getVrijeme().replaceAll("\\.", "").replaceAll("\\,", "")))
+                {
+            throw new ZavrsniZNLhibException("Unos vremena događaja nije valjan");
+            
+        }
+        
+        int min = Integer.parseInt(d.getVrijeme().replaceAll("\\.", "").replaceAll("\\,", ""));
+        if(min<0 || min>130){
+            throw new ZavrsniZNLhibException("Vrijeme nije u rasponu između 0 i 130");
         }
         
         

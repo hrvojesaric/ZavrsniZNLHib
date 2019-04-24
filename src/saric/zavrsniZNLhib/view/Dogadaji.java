@@ -398,7 +398,7 @@ public class Dogadaji extends javax.swing.JFrame {
         d.setMomcad(postaviMomcadBtn());
         d.setUtakmica(lstUtakmice.getSelectedValue());
         d.setVrstadogadaja((VrstaDogadaja) cmbVrstaDogadaja.getSelectedItem());
-        d.setVrijeme(txtMinuta.getText());
+        d.setVrijeme(txtMinuta.getText().replaceAll("\\.", "").replaceAll("\\,", "")+".");
         d.setOpis(txtOpisDogadaja.getText());
 
     }
