@@ -6,8 +6,10 @@
 package saric.zavrsniZNLhib.controller;
 
 import java.util.List;
+import javax.swing.DefaultListModel;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
+import saric.zavrsniZNLhib.model.Igrac;
 import saric.zavrsniZNLhib.model.Sudac;
 import saric.zavrsniZNLhib.pomocno.HibernateUtil;
 import saric.zavrsniZNLhib.pomocno.ObradaSucelje;
@@ -97,6 +99,13 @@ public class ObradaSudac extends Obrada<Sudac> implements ObradaSucelje<Sudac> {
         if (su.getBroj_licence().trim().isEmpty()) {
             throw new ZavrsniZNLhibException("Broj licence nije unesen");
         }
+        
+        DefaultListModel<Igrac> m = new DefaultListModel<>();
+            for (Sudac s : getLista()) {
+                if(s.getBroj_licence().toString().equals(su.getBroj_licence().toString())){
+                    throw new ZavrsniZNLhibException("Već postoji sudac s istim brojem licence");
+                }
+            }
 
         if (su.getDatumrodenja() == null) {
             throw new ZavrsniZNLhibException("Datum rođenja nije definiran");

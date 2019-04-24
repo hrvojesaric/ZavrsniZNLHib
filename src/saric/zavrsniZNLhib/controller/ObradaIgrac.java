@@ -6,6 +6,7 @@
 package saric.zavrsniZNLhib.controller;
 
 import java.util.List;
+import javax.swing.DefaultListModel;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import saric.zavrsniZNLhib.model.Igrac;
@@ -87,6 +88,13 @@ public class ObradaIgrac extends Obrada<Igrac> implements ObradaSucelje<Igrac> {
         if(ig.getBroj_licence().trim().isEmpty()){
             throw new ZavrsniZNLhibException("Broj licence nije unesen");
         }
+        
+        DefaultListModel<Igrac> m = new DefaultListModel<>();
+            for (Igrac s : getLista()) {
+                if(s.getBroj_licence().toString().equals(ig.getBroj_licence().toString())){
+                    throw new ZavrsniZNLhibException("Već postoji igrač s istim brojem licence");
+                }
+            }
         
         if(ig.getMomcad().toString().equals("Odaberite momčad")){
         throw new ZavrsniZNLhibException("Prvo morate odabrati momčad");

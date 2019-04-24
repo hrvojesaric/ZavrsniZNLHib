@@ -16,14 +16,14 @@ import saric.zavrsniZNLhib.pomocno.ZavrsniZNLhibException;
  * @author Hrvoje-PC
  */
 public class ObradaUtakmica extends Obrada<Utakmica> implements ObradaSucelje<Utakmica> {
-    
-    public ObradaUtakmica (){
+
+    public ObradaUtakmica() {
         super();
     }
 
     @Override
     public List<Utakmica> getLista() {
-    return HibernateUtil.getSession().createQuery("from Utakmica").list();
+        return HibernateUtil.getSession().createQuery("from Utakmica").list();
     }
 
     @Override
@@ -34,63 +34,73 @@ public class ObradaUtakmica extends Obrada<Utakmica> implements ObradaSucelje<Ut
 
     @Override
     public void obrisi(Utakmica ut) throws ZavrsniZNLhibException {
-        if(!ut.getDogadajiUtakmica().isEmpty()){
+        if (!ut.getDogadajiUtakmica().isEmpty()) {
             throw new ZavrsniZNLhibException("Ne možete obrisati utakmicu jer su se na njoj događali događaji");
         }
-        
+
         dao.delete(ut);
     }
 
     @Override
     public void kontrola(Utakmica ut) throws ZavrsniZNLhibException {
-        if(ut.getDomaci().toString().equals("Odaberite momčad") || ut.getGosti().toString().equals("Odaberite momčad")){
+        if (ut.getDomaci().toString().equals("Odaberite momčad") || ut.getGosti().toString().equals("Odaberite momčad")) {
             throw new ZavrsniZNLhibException("Morate odabrati momčadi");
         }
-        
-        if(ut.getDomaci().toString().equals(ut.getGosti().toString())){
+
+        if (ut.getDomaci().toString().equals(ut.getGosti().toString())) {
             throw new ZavrsniZNLhibException("Momčadi moraju biti različite");
         }
-        
-        
-        if(ut.getRezultat()==null){
+
+        if (ut.getRezultat() == null) {
             throw new ZavrsniZNLhibException("Rezultat nije definiran");
         }
-        if(ut.getRezultat().trim().isEmpty()){
+        if (ut.getRezultat().trim().isEmpty()) {
             throw new ZavrsniZNLhibException("Rezultat nije unesen");
         }
-       
-        
-        
-        if(ut.getGlavni_sudac()==null){
+        int i = 0;
+        int j = 0;
+        char[] nizRez = ut.getRezultat().replaceAll("\\s+", "").toCharArray();
+        for (char znak : nizRez) {
+
+            if (Character.isDigit(znak)) {
+                j++;
+            }
+            if (!Character.isDigit(znak)) {
+                i++;
+            }
+        }
+
+        if (i != 1 || !ut.getRezultat().contains(":") || j < 2) {
+
+            throw new ZavrsniZNLhibException("Niste unijeli valjani rezultat");
+
+        }
+
+        if (ut.getGlavni_sudac() == null) {
             throw new ZavrsniZNLhibException("Glavni sudac nije postavljen");
         }
-       
-        if(ut.getPrvi_pomocni()==null){
+
+        if (ut.getPrvi_pomocni() == null) {
             throw new ZavrsniZNLhibException("1. pomoćni sudac nije postavljen");
         }
-        
-        
-        if(ut.getDrugi_pomocni()==null){
+
+        if (ut.getDrugi_pomocni() == null) {
             throw new ZavrsniZNLhibException("2. pomoćni sudac nije postavljen");
         }
-        
-        if(ut.getGlavni_sudac().toString().equals(ut.getPrvi_pomocni().toString()) ||
-                ut.getGlavni_sudac().toString().equals(ut.getDrugi_pomocni().toString()) ||
-                ut.getGlavni_sudac().toString().equals(ut.getPrvi_pomocni().toString())){
+
+        if (ut.getGlavni_sudac().toString().equals(ut.getPrvi_pomocni().toString())
+                || ut.getGlavni_sudac().toString().equals(ut.getDrugi_pomocni().toString())
+                || ut.getGlavni_sudac().toString().equals(ut.getPrvi_pomocni().toString())) {
             throw new ZavrsniZNLhibException("Suci moraju biti različiti");
         }
-        
-        if(ut.getPocetak()==null){
+
+        if (ut.getPocetak() == null) {
             throw new ZavrsniZNLhibException("Datum početka nije definiran");
         }
-        if(ut.getPocetak().toString().trim().isEmpty()){
+        if (ut.getPocetak().toString().trim().isEmpty()) {
             throw new ZavrsniZNLhibException("Datum početka nije unesen");
         }
-        
-        
-        
-        
 
     }
-    
+
 }

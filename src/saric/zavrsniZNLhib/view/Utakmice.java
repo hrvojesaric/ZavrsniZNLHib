@@ -101,7 +101,7 @@ public class Utakmice extends javax.swing.JFrame {
         u.setGlavni_sudac(postaviGlSuca());
         u.setPrvi_pomocni(postaviPPSuca());
         u.setDrugi_pomocni(postaviDPSuca());
-        u.setRezultat(txtRezultat.getText());
+        u.setRezultat(txtRezultat.getText().replaceAll("\\s+",""));
 
     }
 
@@ -468,7 +468,7 @@ public class Utakmice extends javax.swing.JFrame {
 
         ucitajEntitete();
 
-        ocistiPolja();
+        
     }//GEN-LAST:event_btnPromjenaActionPerformed
 
     private void btnBrisanjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrisanjeActionPerformed
