@@ -43,11 +43,41 @@ public class ObradaUtakmica extends Obrada<Utakmica> implements ObradaSucelje<Ut
 
     @Override
     public void kontrola(Utakmica ut) throws ZavrsniZNLhibException {
+        if(ut.getDomaci().toString().equals("Odaberite momčad") || ut.getGosti().toString().equals("Odaberite momčad")){
+            throw new ZavrsniZNLhibException("Morate odabrati momčadi");
+        }
+        
+        if(ut.getDomaci().toString().equals(ut.getGosti().toString())){
+            throw new ZavrsniZNLhibException("Momčadi moraju biti različite");
+        }
+        
+        
         if(ut.getRezultat()==null){
             throw new ZavrsniZNLhibException("Rezultat nije definiran");
         }
         if(ut.getRezultat().trim().isEmpty()){
             throw new ZavrsniZNLhibException("Rezultat nije unesen");
+        }
+       
+        
+        
+        if(ut.getGlavni_sudac()==null){
+            throw new ZavrsniZNLhibException("Glavni sudac nije postavljen");
+        }
+       
+        if(ut.getPrvi_pomocni()==null){
+            throw new ZavrsniZNLhibException("1. pomoćni sudac nije postavljen");
+        }
+        
+        
+        if(ut.getDrugi_pomocni()==null){
+            throw new ZavrsniZNLhibException("2. pomoćni sudac nije postavljen");
+        }
+        
+        if(ut.getGlavni_sudac().toString().equals(ut.getPrvi_pomocni().toString()) ||
+                ut.getGlavni_sudac().toString().equals(ut.getDrugi_pomocni().toString()) ||
+                ut.getGlavni_sudac().toString().equals(ut.getPrvi_pomocni().toString())){
+            throw new ZavrsniZNLhibException("Suci moraju biti različiti");
         }
         
         if(ut.getPocetak()==null){
@@ -56,21 +86,8 @@ public class ObradaUtakmica extends Obrada<Utakmica> implements ObradaSucelje<Ut
         if(ut.getPocetak().toString().trim().isEmpty()){
             throw new ZavrsniZNLhibException("Datum početka nije unesen");
         }
-        if(ut.getGlavni_sudac()==null || ut.getPrvi_pomocni()==null || ut.getDrugi_pomocni()==null){
-            throw new ZavrsniZNLhibException("Suci nisu odabrani");
-        }
-        if(ut.getGlavni_sudac().toString().equals(ut.getPrvi_pomocni().toString()) ||
-                ut.getGlavni_sudac().toString().equals(ut.getDrugi_pomocni().toString()) ||
-                ut.getGlavni_sudac().toString().equals(ut.getPrvi_pomocni().toString())){
-            throw new ZavrsniZNLhibException("Suci moraju biti različiti");
-        }
-        if(ut.getDomaci().toString().equals("Odaberite momčad") || ut.getGosti().toString().equals("Odaberite momčad")){
-            throw new ZavrsniZNLhibException("Morate odabrati momčadi");
-        }
         
-        if(ut.getDomaci().toString().equals(ut.getGosti().toString())){
-            throw new ZavrsniZNLhibException("Momčadi moraju biti različite");
-        }
+        
         
         
 

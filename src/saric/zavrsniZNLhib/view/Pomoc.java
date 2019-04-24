@@ -56,7 +56,7 @@ public class Pomoc extends javax.swing.JFrame {
 
         jLabel2.setText("nakon što je prijava uspješno");
 
-        jLabel3.setText("prošla drugim akcijama možete");
+        jLabel3.setText("obavljena drugim akcijama možete");
 
         jLabel4.setText("pristupiti preko gumba \"Izbornik\"");
 
