@@ -89,13 +89,6 @@ public class ObradaIgrac extends Obrada<Igrac> implements ObradaSucelje<Igrac> {
             throw new ZavrsniZNLhibException("Broj licence nije unesen");
         }
         
-        DefaultListModel<Igrac> m = new DefaultListModel<>();
-            for (Igrac s : getLista()) {
-                if(s.getBroj_licence().toString().equals(ig.getBroj_licence().toString())){
-                    throw new ZavrsniZNLhibException("Već postoji igrač s istim brojem licence");
-                }
-            }
-        
         if(ig.getMomcad().toString().equals("Odaberite momčad")){
         throw new ZavrsniZNLhibException("Prvo morate odabrati momčad");
         }

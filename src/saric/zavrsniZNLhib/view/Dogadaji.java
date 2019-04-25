@@ -297,6 +297,7 @@ public class Dogadaji extends javax.swing.JFrame {
         try {
             obradaEntitet.obrisi(dog);
             ucitajEntitete();
+            ocistiPolja();
 
         } catch (ZavrsniZNLhibException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -327,7 +328,7 @@ public class Dogadaji extends javax.swing.JFrame {
             DefaultListModel<Dogadaj> nd = new DefaultListModel<>();
             Dogadaj dg = new Dogadaj();
             dg.setSifra(-2);
-            dg.setNaziv("Nema događaja na utakmici");
+            dg.setNaziv("Nema unesenih događaja");
             dg.setVrijeme("");
             dg.setOpis("");
             nd.addElement(dg);

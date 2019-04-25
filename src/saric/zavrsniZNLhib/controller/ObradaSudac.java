@@ -67,11 +67,12 @@ public class ObradaSudac extends Obrada<Sudac> implements ObradaSucelje<Sudac> {
 
     @Override
     public void obrisi(Sudac su) throws ZavrsniZNLhibException {
-        if (!su.getUtakmiceDrugiPomocni().isEmpty() && !su.getUtakmiceGlavni().isEmpty() && !su.getUtakmicePrviPomocni().isEmpty()) {
+        
+        if (!su.getUtakmiceDrugiPomocni().isEmpty() || !su.getUtakmiceGlavni().isEmpty() || !su.getUtakmicePrviPomocni().isEmpty()) {
             throw new ZavrsniZNLhibException("Sudac se ne može obrisati jer je sudio na utakmicama.");
 
-        }
-        dao.delete(su);
+        }else{
+        dao.delete(su);}
     }
 
     @Override
@@ -99,13 +100,6 @@ public class ObradaSudac extends Obrada<Sudac> implements ObradaSucelje<Sudac> {
         if (su.getBroj_licence().trim().isEmpty()) {
             throw new ZavrsniZNLhibException("Broj licence nije unesen");
         }
-        
-        DefaultListModel<Igrac> m = new DefaultListModel<>();
-            for (Sudac s : getLista()) {
-                if(s.getBroj_licence().toString().equals(su.getBroj_licence().toString())){
-                    throw new ZavrsniZNLhibException("Već postoji sudac s istim brojem licence");
-                }
-            }
 
         if (su.getDatumrodenja() == null) {
             throw new ZavrsniZNLhibException("Datum rođenja nije definiran");

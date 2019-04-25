@@ -36,8 +36,8 @@ public class Igraci extends javax.swing.JFrame {
 
     private ObradaIgrac obradaEntitet;
     private static DefaultComboBoxModel<Momcad> modelMomcad;
-    private static final String NEMA_SLIKU=Pomocno.getPutanjaAplikacije() + 
-                "slike" + File.separator + "nemaSlike.jpg";
+    private static final String NEMA_SLIKU = Pomocno.getPutanjaAplikacije()
+            + "slike" + File.separator + "nemaSlike.jpg";
 
     /**
      * Creates new form Polaznici
@@ -46,7 +46,7 @@ public class Igraci extends javax.swing.JFrame {
         initComponents();
         obradaEntitet = new ObradaIgrac();
         // ucitajEntitete();
-        
+
         ucitajSlikuPolaznika(NEMA_SLIKU);
 
         DefaultComboBoxModel<Momcad> ms = new DefaultComboBoxModel<>();
@@ -289,7 +289,7 @@ public class Igraci extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lstEntitetiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitetiValueChanged
-        
+
         if (evt.getValueIsAdjusting()) {
             return;
         }
@@ -315,27 +315,28 @@ public class Igraci extends javax.swing.JFrame {
         txtIme.setText(entitet.getIme());
         txtPrezime.setText(entitet.getPrezime());
         txtBrojregistracije.setText(entitet.getBroj_licence());
-        String putanja=Pomocno.getPutanjaAplikacije()+"slike"+File.separator+entitet.getSifra()+".png";
-        if(new File(putanja).exists()){
+        String putanja = Pomocno.getPutanjaAplikacije() + "slike" + File.separator + entitet.getSifra() + ".png";
+        if (new File(putanja).exists()) {
             ucitajSlikuPolaznika(putanja);
-        }else{
+        } else {
             ucitajSlikuPolaznika(NEMA_SLIKU);
         }
 
 
     }//GEN-LAST:event_lstEntitetiValueChanged
 
-     private void ucitajSlikuPolaznika(String putanja){
-          try {
-           Image i = ImageIO.read(new File(putanja));
-   // Image i = ImageIO.read(new URL("https://result.issf-sports.info/get_image.php?issfid=SHIRLM2710197001&width=1500"));
-        lblSlika.setIcon(new ImageIcon(i.getScaledInstance(120, 180, Image.SCALE_DEFAULT)));
-        
+    private void ucitajSlikuPolaznika(String putanja) {
+        try {
+            Image i = ImageIO.read(new File(putanja));
+            // Image i = ImageIO.read(new URL("https://result.issf-sports.info/get_image.php?issfid=SHIRLM2710197001&width=1500"));
+            lblSlika.setIcon(new ImageIcon(i.getScaledInstance(120, 180, Image.SCALE_DEFAULT)));
+
         } catch (Exception e) {
         }
     }
+
     private void ocistiPolja() {
-       
+
         dpcDatumRodenja.setDate(null);
         txtIme.setText("");
         txtPrezime.setText("");
@@ -357,14 +358,24 @@ public class Igraci extends javax.swing.JFrame {
         entitet.setPrezime(txtPrezime.getText());
         entitet.setBroj_licence(txtBrojregistracije.getText());
         entitet.setMomcad((Momcad) cmbMomcadi.getSelectedItem());
-         
 
     }
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         Igrac entitet = new Igrac();
-        
+
         preuzmiVrijednosti(entitet);
+        boolean postoji=false;
+        
+        for (Igrac s : obradaEntitet.getLista()) {
+            if (s.getBroj_licence().toString().equals(entitet.getBroj_licence().toString())) {
+                JOptionPane.showMessageDialog(null, "Već postoji igrač s istim brojem licence");
+                postoji=true;
+            }
+        }
+        if (postoji) {
+            return;
+        } else {
 
         try {
 
@@ -377,8 +388,8 @@ public class Igraci extends javax.swing.JFrame {
         ucitajEntitete();
 
         ocistiPolja();
-        
-        
+        }
+
 
     }//GEN-LAST:event_btnDodajActionPerformed
 
@@ -419,21 +430,24 @@ public class Igraci extends javax.swing.JFrame {
         Igrac entitet = lstEntiteti.getSelectedValue();
 
         if (entitet == null) {
-            JOptionPane.showConfirmDialog(null, "Prvo odaberite igrača");
+            JOptionPane.showMessageDialog(null, "Prvo odaberite igrača");
         }
 
+        
         preuzmiVrijednosti(entitet);
+        DefaultListModel<Igrac> m = new DefaultListModel<>();
+        
+            try {
+                obradaEntitet.spremi(entitet);
+            } catch (ZavrsniZNLhibException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                return;
+            }
 
-        try {
-            obradaEntitet.spremi(entitet);
-        } catch (ZavrsniZNLhibException e) {
-            JOptionPane.showConfirmDialog(null, e.getMessage());
-            return;
-        }
+            ucitajEntitete();
 
-        ucitajEntitete();
-
-        ocistiPolja();
+            ocistiPolja();
+        
 
     }//GEN-LAST:event_btnPromjenaActionPerformed
 
@@ -451,7 +465,7 @@ public class Igraci extends javax.swing.JFrame {
         } catch (ZavrsniZNLhibException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return;
-            
+
         }
 
     }//GEN-LAST:event_btnBrisanjeActionPerformed
@@ -471,40 +485,37 @@ public class Igraci extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOcistiPoljaActionPerformed
 
     private void cmbMomcadiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMomcadiActionPerformed
-        
+
     }//GEN-LAST:event_cmbMomcadiActionPerformed
 
     private void btnDodajFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajFotoActionPerformed
-         Igrac ig = lstEntiteti.getSelectedValue();
-        if(ig==null){
-            JOptionPane.showMessageDialog(null,"Prvo odaberi polaznika");
+        Igrac ig = lstEntiteti.getSelectedValue();
+        if (ig == null) {
+            JOptionPane.showMessageDialog(null, "Prvo odaberi polaznika");
             return;
         }
-        
-        JFileChooser odaberiSliku = new JFileChooser(System.getProperty("user.home"));
-        
-        odaberiSliku.setFileFilter(new FileNameExtensionFilter("Slike", "jpg", "png", "gif", "bmp"));
-     
 
-        
-        if(odaberiSliku.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){
+        JFileChooser odaberiSliku = new JFileChooser(System.getProperty("user.home"));
+
+        odaberiSliku.setFileFilter(new FileNameExtensionFilter("Slike", "jpg", "png", "gif", "bmp"));
+
+        if (odaberiSliku.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             try {
                 Image i = ImageIO.read(odaberiSliku.getSelectedFile());
-                
-                String putanja = Pomocno.getPutanjaAplikacije()+"slike"+
-                        File.separator + ig.getSifra() + ".png";
-                
-                ImageIO.write((BufferedImage)i, "png", new File(putanja));
-                
+
+                String putanja = Pomocno.getPutanjaAplikacije() + "slike"
+                        + File.separator + ig.getSifra() + ".png";
+
+                ImageIO.write((BufferedImage) i, "png", new File(putanja));
+
                 ucitajSlikuPolaznika(putanja);
-                
+
             } catch (Exception e) {
             }
-            
-            
+
         }
-        
-      
+
+
     }//GEN-LAST:event_btnDodajFotoActionPerformed
 
 

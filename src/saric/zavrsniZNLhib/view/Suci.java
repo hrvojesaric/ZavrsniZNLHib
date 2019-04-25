@@ -218,6 +218,17 @@ public class Suci extends javax.swing.JFrame {
         Sudac entitet = new Sudac();
 
         preuzmiVrijednosti(entitet);
+        boolean postoji=false;
+        
+        for (Sudac s : obradaEntitet.getLista()) {
+            if (s.getBroj_licence().toString().equals(entitet.getBroj_licence().toString())) {
+                JOptionPane.showMessageDialog(null, "Već postoji sudac s istim brojem licence");
+                postoji=true;
+            }
+        }
+        if (postoji) {
+            return;
+        } else {
 
         try {
             obradaEntitet.spremi(entitet);
@@ -229,6 +240,7 @@ public class Suci extends javax.swing.JFrame {
         ucitajEntitete();
 
         ocistiPolja();
+        }
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnPromjenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjenaActionPerformed
@@ -256,7 +268,7 @@ public class Suci extends javax.swing.JFrame {
         Sudac entitet = lstEntiteti.getSelectedValue();
 
         if (entitet == null) {
-            JOptionPane.showMessageDialog(null, "Prvo odaberite smjer");
+            JOptionPane.showMessageDialog(null, "Prvo odaberite suca");
         }
 
         try {
@@ -264,7 +276,7 @@ public class Suci extends javax.swing.JFrame {
             ucitajEntitete();
             ocistiPolja();
         } catch (ZavrsniZNLhibException ex) {
-            JOptionPane.showMessageDialog(null, "Ne mogu obrisati");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_btnBrisanjeActionPerformed
 

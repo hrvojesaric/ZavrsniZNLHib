@@ -155,11 +155,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPrijavaActionPerformed
 
     private void txtKorisnickoImeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtKorisnickoImeMouseClicked
-        txtKorisnickoIme.setText("hrvoje.saric93@gmail.com");
+        txtKorisnickoIme.setText("");
     }//GEN-LAST:event_txtKorisnickoImeMouseClicked
 
     private void pwdLozinkaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pwdLozinkaMouseClicked
-        pwdLozinka.setText("h");
+        pwdLozinka.setText("");
     }//GEN-LAST:event_pwdLozinkaMouseClicked
 
     private void btnRegistracijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistracijaActionPerformed

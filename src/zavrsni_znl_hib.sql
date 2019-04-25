@@ -46,7 +46,7 @@ CREATE TABLE `dogadaj` (
 
 LOCK TABLES `dogadaj` WRITE;
 /*!40000 ALTER TABLE `dogadaj` DISABLE KEYS */;
-INSERT INTO `dogadaj` VALUES (25,'Min : 33. ; Žuti Karton','Mario Šarić, Prigovor sucu','33.',2,19,23),(65,'Min : 45 ; Pogodak','sSaaaa','45',2,27,21),(67,'Min : 3 ; Kazneni udarac','das','3',6,64,20),(69,'Min : 23 ; Autogol','dsa','23',3,26,22),(72,'Min : 23 ; Pogodak','dasd','23',3,64,21),(74,'Min : 53 ; Crveni Karton','Danijel Dražetić; udaranje igrača bez lopte','53',5,62,24),(77,'Min : 32 ; Autogol','blabla','32',2,27,22);
+INSERT INTO `dogadaj` VALUES (106,'Min : 33 ; Pogodak','Pogodak postigao Marko Blašković','33.',81,102,21),(107,'Min : 65 ; Autogol','Autogol je postigao Ivan Filipović','65.',2,102,22),(108,'Min : 70. ; Žuti Karton','Marko Markanjević; povlačenje \nprotivničkog igrača za dres\n','70.',81,102,23),(109,'Min : 33 ; Žuti Karton','Ante Dražetić; Prigovor sucu','33.',5,103,23),(110,'Min : 43 ; Pogodak','Pogodak postigao Josip Ružičić','43.',6,103,21),(111,'Min : 32 ; Crveni Karton','Stjepan Majetić: udaranje igrača bez\nlopte.','32.',2,105,24);
 /*!40000 ALTER TABLE `dogadaj` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +68,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (78),(78),(78),(78),(78),(78),(78);
+INSERT INTO `hibernate_sequence` VALUES (112),(112),(112),(112),(112),(112),(112);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ CREATE TABLE `igrac` (
 
 LOCK TABLES `igrac` WRITE;
 /*!40000 ALTER TABLE `igrac` DISABLE KEYS */;
-INSERT INTO `igrac` VALUES (8,'12311','1995-01-05','Ivan','Prskalo',2),(35,'123','2019-04-12','dasd','dasda',3),(44,'3213','2019-04-18','fasfdfas','fasfsa',5),(45,'3123','2019-04-19','fdasd','sdadasd',2),(47,'2312','1995-01-12','sdasd','dsadsa',5),(55,'213312','2019-04-11','sdas','sddas',6);
+INSERT INTO `igrac` VALUES (8,'8540734','1993-06-01','Ivan','Prskalo',2),(84,'8502617','1996-12-02','Stjepan','Majetić',2),(85,'8502623','1997-04-17','Josip','Nović',2),(86,'8502611','1993-04-03','Ivan','Filipović',2),(87,'8500577','1993-04-29','Marko','Blašković',81),(88,'8503041','1996-09-19','Marko','Markanović',81),(89,'8503177','1995-02-04','Slavko','Mlinarić',81),(90,'8540217','1988-06-03','Ivan','Glavaš',3),(91,'8500294','1977-07-27','Ivica','Blašković',3),(92,'8501068','1979-09-05','Ante','Dražetić',5),(93,'8504158','2000-10-19','Josip','Ružičić',6);
 /*!40000 ALTER TABLE `igrac` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +151,7 @@ CREATE TABLE `momcad` (
 
 LOCK TABLES `momcad` WRITE;
 /*!40000 ALTER TABLE `momcad` DISABLE KEYS */;
-INSERT INTO `momcad` VALUES (2,'Hrvoje Ribić','Sulkovci','Josip Šutić','Sulkovački stadion','Predrag Šarić'),(3,'Mali Madaj','Dinamo Rajsavac','Josip Glavaš','Kraj groblja',NULL),(5,'Pavo Nikolić','Hrvatski dragovoljac Drenovac','Marko Vidakušić','Hrvatskih vitezova',NULL),(6,'Josip Lulić','Graničar Zagrađe','Igor Ančurovski','Pod brdom','Josip Mijatović');
+INSERT INTO `momcad` VALUES (2,'Hrvoje Ribić','Sulkovci','Josip Šutić','Tribljavina','Predrag Šarić'),(3,'Mali Madaj','Dinamo Rajsavac','Josip Glavaš','Kraj groblja','Slavko Pavlović'),(5,'Pavo Nikolić','HD Drenovac','Marko Vidakušić','Hrvatskih vitezova','Željko Matijević'),(6,'Josip Lulić','Graničar Zagrađe','Igor Ančurovski','Pod brdom','Josip Mijatović'),(81,'Marijan Kovačević','Sloga Trenkovo','','Park','Jurica Bešlić'),(82,'','Slaven Gradac','Goran Pavlović','Klasije','Goran Vrgoč'),(83,'','Parasan Golobrdci','','Pod selom','Mihael Supan');
 /*!40000 ALTER TABLE `momcad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,7 +205,7 @@ CREATE TABLE `sudac` (
 
 LOCK TABLES `sudac` WRITE;
 /*!40000 ALTER TABLE `sudac` DISABLE KEYS */;
-INSERT INTO `sudac` VALUES (9,'321312','1993-11-10','Lizzie','Osinski'),(10,'321312','1993-11-10','Elliott','Stamm'),(11,'321312','1993-11-10','Darion','Lemke'),(12,'321312','1993-11-10','Nona','Ryan'),(13,'321312','1993-11-12','Alexandrea','Adams'),(14,'321312','1993-11-10','Emmett','Pacocha'),(15,'321312','1993-11-10','Gerhard','Kub'),(16,'321312','1993-11-10','Chaz','Ankunding'),(17,'321312','1993-11-10','Odie','Daugherty'),(18,'321312','1993-11-10','Janae','Collins'),(48,'123','2019-04-11','da','da'),(49,'1213','1995-01-01','sa','SAD');
+INSERT INTO `sudac` VALUES (94,'84804493432','1992-02-16','Marko','Abramović'),(95,'22166002600','1972-09-15','Josip','Baltić'),(96,'27114749334','1992-03-10','Domagoj','Jakovljević'),(97,'33283950872','1988-01-01','Nikola','Jurišić'),(98,'99964910891','1973-06-12','Milan','Matošević'),(99,'68026965721','1953-04-16','Josip','Podobnik'),(100,'90615987695','1998-05-03','Marko','Šubara'),(101,'33706605384','1985-11-16','Ivica','Vidović');
 /*!40000 ALTER TABLE `sudac` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +246,7 @@ CREATE TABLE `utakmica` (
 
 LOCK TABLES `utakmica` WRITE;
 /*!40000 ALTER TABLE `utakmica` DISABLE KEYS */;
-INSERT INTO `utakmica` VALUES (19,'Sulkovci - Dinamo Rajsavac ( 4:2 )','2019-04-11','4:2',2,15,10,3,14),(26,'Dinamo Rajsavac - Hrvatski dragovoljac Drenovac ( 2:2 )','2019-04-24','2:2',3,11,9,5,14),(27,'Graničar Zagrađe - Sulkovci ( 2:0 )','2019-04-16','2:0',6,10,12,2,12),(62,'Hrvatski dragovoljac Drenovac - Dinamo Rajsavac ( 0 : 0 )','2019-04-10','0 : 0',5,14,9,3,12),(64,'Graničar Zagrađe - Dinamo Rajsavac ( 2 : 0 )','2019-04-11','2 : 0',6,13,11,3,10);
+INSERT INTO `utakmica` VALUES (102,'Sulkovci - Sloga Trenkovo ( 4 : 2 )','2019-03-03','4:2',2,100,94,81,97),(103,'HD Drenovac - Graničar Zagrađe ( 1 : 2 )','2019-03-24','1:2',5,96,98,6,101),(104,'Parasan Golobrdci - Slaven Gradac ( 2:2 )','2019-04-07','2:2',83,99,97,82,95),(105,'HD Drenovac - Sulkovci ( 2 : 1 )','2019-04-22','2:1',5,100,96,2,97);
 /*!40000 ALTER TABLE `utakmica` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,4 +283,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24 16:01:24
+-- Dump completed on 2019-04-25 11:42:09

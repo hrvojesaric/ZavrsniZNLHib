@@ -101,7 +101,7 @@ public class Utakmice extends javax.swing.JFrame {
         u.setGlavni_sudac(postaviGlSuca());
         u.setPrvi_pomocni(postaviPPSuca());
         u.setDrugi_pomocni(postaviDPSuca());
-        u.setRezultat(txtRezultat.getText().replaceAll("\\s+",""));
+        u.setRezultat(txtRezultat.getText().replaceAll("\\s+", ""));
 
     }
 
@@ -468,7 +468,7 @@ public class Utakmice extends javax.swing.JFrame {
 
         ucitajEntitete();
 
-        
+
     }//GEN-LAST:event_btnPromjenaActionPerformed
 
     private void btnBrisanjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrisanjeActionPerformed
@@ -480,11 +480,12 @@ public class Utakmice extends javax.swing.JFrame {
 
         try {
             obradaEntitet.obrisi(entitet);
-            ucitajEntitete();
-            ocistiPolja();
+
         } catch (ZavrsniZNLhibException ex) {
-            JOptionPane.showMessageDialog(null, "Ne mogu obrisati");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
+        ucitajEntitete();
+        ocistiPolja();
     }//GEN-LAST:event_btnBrisanjeActionPerformed
 
     private void lstEntitetiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitetiValueChanged
@@ -517,11 +518,11 @@ public class Utakmice extends javax.swing.JFrame {
 
         txtRezultat.setText(entitet.getRezultat());
         txtGSudac.setText(entitet.getGlavni_sudac().getIme() + " " + entitet.getGlavni_sudac().getPrezime());
-        glSuSif=entitet.getGlavni_sudac().getSifra();
+        glSuSif = entitet.getGlavni_sudac().getSifra();
         txtPPomocni.setText(entitet.getPrvi_pomocni().getIme() + " " + entitet.getPrvi_pomocni().getPrezime());
-        ppSuSif=entitet.getPrvi_pomocni().getSifra();
+        ppSuSif = entitet.getPrvi_pomocni().getSifra();
         txtDPomocni.setText(entitet.getDrugi_pomocni().getIme() + " " + entitet.getDrugi_pomocni().getPrezime());
-        dpSuSif=entitet.getDrugi_pomocni().getSifra();
+        dpSuSif = entitet.getDrugi_pomocni().getSifra();
         lblStadion.setText("Stadion :       " + entitet.getDomaci().getStadion());
 
     }//GEN-LAST:event_lstEntitetiValueChanged
