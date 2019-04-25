@@ -118,6 +118,9 @@ public class Utakmice extends javax.swing.JFrame {
         lblStadion.setText("Stadion :");
         lstEntiteti.setSelectedValue(null, false);
         lstSuci.setSelectedValue(null, false);
+        glSuSif = -400;
+        ppSuSif = -400;
+        dpSuSif = -400;
     }
 
     private void ucitajEntitete() {
